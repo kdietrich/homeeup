@@ -10,7 +10,7 @@ Currently it is possible to simulate switches (HM-LC-Sw1-FM) and remote controls
 
 ## How-to
 
-1. Install homeeUp: `npm install -g homeeup`
+1. Install homeeUp: `sudo npm install -g homeeup`
 2. Modify your `config.js` file. See below for more information.
 3. Start it up: `LOG=info homeeup`
 4. Add a new Homematic CCU to homee.
