@@ -1,0 +1,340 @@
+{
+  "channels": [
+    {
+      "ADDRESS": "%ADDRESS%",
+      "CHILDREN": [
+        "%ADDRESS%:0",
+        "%ADDRESS%:1",
+        "%ADDRESS%:2",
+        "%ADDRESS%:3",
+        "%ADDRESS%:4"
+      ],
+      "FIRMWARE": "1.0",
+      "FLAGS": 1,
+      "INTERFACE": "HOMEEUP",
+      "PARAMSETS": [],
+      "RF_ADDRESS": 0,
+      "ROAMING": 0,
+      "RX_MODE": 1,
+      "TYPE": "HM-RC-4-2",
+      "UPDATABLE": 1,
+      "VERSION": 41
+    },
+    {
+      "TYPE": "MAINTENANCE",
+      "ADDRESS": "%ADDRESS%:0",
+      "RF_ADDRESS": 0,
+      "PARENT": "%ADDRESS%",
+      "PARENT_TYPE": "HM-RC-4-2",
+      "INDEX": 0,
+      "UPDATABLE": true,
+      "FLAGS": 3,
+      "DIRECTION": 2,
+      "VERSION": 41,
+      "PARAMSETS": [
+        "MASTER",
+        "VALUES"
+      ],
+      "AES_ACTIVE": 0
+    },
+    {
+      "TYPE": "KEY",
+      "ADDRESS": "%ADDRESS%:1",
+      "RF_ADDRESS": 0,
+      "PARENT": "%ADDRESS%",
+      "PARENT_TYPE": "HM-RC-4-2",
+      "INDEX": 1,
+      "UPDATABLE": true,
+      "FLAGS": 1,
+      "DIRECTION": 0,
+      "VERSION": 41,
+      "PARAMSETS": [
+        "MASTER",
+        "VALUES",
+        "LINK"
+      ],
+      "AES_ACTIVE": 0
+    },
+    {
+      "TYPE": "KEY",
+      "ADDRESS": "%ADDRESS%:2",
+      "RF_ADDRESS": 0,
+      "PARENT": "%ADDRESS%",
+      "PARENT_TYPE": "HM-RC-4-2",
+      "INDEX": 2,
+      "UPDATABLE": true,
+      "FLAGS": 1,
+      "DIRECTION": 0,
+      "VERSION": 41,
+      "PARAMSETS": [
+        "MASTER",
+        "VALUES",
+        "LINK"
+      ],
+      "AES_ACTIVE": 0
+    },
+    {
+      "TYPE": "KEY",
+      "ADDRESS": "%ADDRESS%:3",
+      "RF_ADDRESS": 0,
+      "PARENT": "%ADDRESS%",
+      "PARENT_TYPE": "HM-RC-4-2",
+      "INDEX": 3,
+      "UPDATABLE": true,
+      "FLAGS": 1,
+      "DIRECTION": 0,
+      "VERSION": 41,
+      "PARAMSETS": [
+        "MASTER",
+        "VALUES",
+        "LINK"
+      ],
+      "AES_ACTIVE": 0
+    },
+    {
+      "TYPE": "KEY",
+      "ADDRESS": "%ADDRESS%:4",
+      "RF_ADDRESS": 0,
+      "PARENT": "%ADDRESS%",
+      "PARENT_TYPE": "HM-RC-4-2",
+      "INDEX": 4,
+      "UPDATABLE": true,
+      "FLAGS": 1,
+      "DIRECTION": 0,
+      "VERSION": 41,
+      "PARAMSETS": [
+        "MASTER",
+        "VALUES",
+        "LINK"
+      ],
+      "AES_ACTIVE": 0
+    }
+  ],
+  "paramsetDescriptions": [
+    {
+      "name": "%ADDRESS%:0",
+      "type": "MASTER",
+      "value": {}
+    },
+    {
+      "name": "%ADDRESS%:0",
+      "type": "VALUES",
+      "value": {
+        "UNREACH": {
+          "FLAGS": 9,
+          "ID": "UNREACH",
+          "OPERATIONS": 5,
+          "TAB_ORDER": 0,
+          "TYPE": "BOOL"
+        },
+        "STICKY_UNREACH": {
+          "FLAGS": 24,
+          "ID": "STICKY_UNREACH",
+          "OPERATIONS": 7,
+          "TAB_ORDER": 1,
+          "TYPE": "BOOL"
+        },
+        "CONFIG_PENDING": {
+          "FLAGS": 9,
+          "ID": "CONFIG_PENDING",
+          "OPERATIONS": 5,
+          "TAB_ORDER": 2,
+          "TYPE": "BOOL"
+        },
+        "LOWBAT": {
+          "FLAGS": 9,
+          "ID": "LOWBAT",
+          "OPERATIONS": 5,
+          "TAB_ORDER": 3,
+          "TYPE": "BOOL"
+        },
+        "AES_KEY": {
+          "FLAGS": 0,
+          "ID": "AES_KEY",
+          "MIN": 0,
+          "MAX": 127,
+          "OPERATIONS": 1,
+          "TAB_ORDER": 4,
+          "TYPE": "INTEGER"
+        },
+        "RSSI_DEVICE": {
+          "FLAGS": 1,
+          "ID": "RSSI_DEVICE",
+          "OPERATIONS": 5,
+          "TAB_ORDER": 5,
+          "TYPE": "INTEGER"
+        },
+        "RSSI_PEER": {
+          "FLAGS": 1,
+          "ID": "RSSI_PEER",
+          "OPERATIONS": 5,
+          "TAB_ORDER": 6,
+          "TYPE": "INTEGER"
+        }
+      }
+    },
+    {
+      "name": "%ADDRESS%:1|%ADDRESS%:2|%ADDRESS%:3|%ADDRESS%:4",
+      "type": "MASTER",
+      "value": {
+        "AES_ACTIVE": {
+          "FLAGS": 3,
+          "ID": "AES_ACTIVE",
+          "MIN": "",
+          "MAX": "",
+          "OPERATIONS": 3,
+          "TAB_ORDER": 2,
+          "TYPE": "BOOL"
+        },
+        "DBL_PRESS_TIME": {
+          "FLAGS": 1,
+          "ID": "DBL_PRESS_TIME",
+          "MIN": {
+            "explicitDouble": 0
+          },
+          "MAX": {
+            "explicitDouble": 1.5
+          },
+          "DEFAULT": {
+            "explicitDouble": 0
+          },
+          "OPERATIONS": 3,
+          "TAB_ORDER": 1,
+          "TYPE": "FLOAT",
+          "UNIT": "s"
+        },
+        "LONG_PRESS_TIME": {
+          "FLAGS": 1,
+          "ID": "LONG_PRESS_TIME",
+          "MIN": {
+            "explicitDouble": 0.3
+          },
+          "MAX": {
+            "explicitDouble": 1.8
+          },
+          "DEFAULT": {
+            "explicitDouble": 0.4
+          },
+          "OPERATIONS": 3,
+          "TAB_ORDER": 0,
+          "TYPE": "FLOAT",
+          "UNIT": "s"
+        },
+        "CMD_PRESS_SHORT": {
+          "FLAGS": 1,
+          "ID": "CMD_PRESS_SHORT",
+          "MIN": "",
+          "MAX": "",
+          "DEFAULT": "",
+          "OPERATIONS": 3,
+          "TAB_ORDER": 0,
+          "TYPE": "STRING",
+          "UNIT": ""
+        },
+        "CMD_PRESS_LONG": {
+          "FLAGS": 1,
+          "ID": "CMD_PRESS_LONG",
+          "MIN": "",
+          "MAX": "",
+          "DEFAULT": "",
+          "OPERATIONS": 3,
+          "TAB_ORDER": 0,
+          "TYPE": "STRING",
+          "UNIT": ""
+        }
+      }
+    },
+    {
+      "name": "%ADDRESS%:1|%ADDRESS%:2|%ADDRESS%:3|%ADDRESS%:4",
+      "type": "VALUES",
+      "value": {
+        "INSTALL_TEST": {
+          "FLAGS": 3,
+          "ID": "INSTALL_TEST",
+          "MIN": "",
+          "MAX": "",
+          "OPERATIONS": 2,
+          "TAB_ORDER": 2,
+          "TYPE": "ACTION"
+        },
+        "PRESS_CONT": {
+          "FLAGS": 3,
+          "ID": "PRESS_CONT",
+          "MIN": "",
+          "MAX": "",
+          "OPERATIONS": 4,
+          "TAB_ORDER": 3,
+          "TYPE": "ACTION"
+        },
+        "PRESS_LONG": {
+          "CONTROL": "BUTTON.LONG",
+          "FLAGS": 1,
+          "ID": "PRESS_LONG",
+          "MIN": "",
+          "MAX": "",
+          "OPERATIONS": 6,
+          "TAB_ORDER": 1,
+          "TYPE": "ACTION"
+        },
+        "PRESS_LONG_RELEASE": {
+          "FLAGS": 3,
+          "ID": "PRESS_LONG_RELEASE",
+          "MIN": "",
+          "MAX": "",
+          "OPERATIONS": 4,
+          "TAB_ORDER": 4,
+          "TYPE": "ACTION"
+        },
+        "PRESS_SHORT": {
+          "CONTROL": "BUTTON.SHORT",
+          "FLAGS": 1,
+          "ID": "PRESS_SHORT",
+          "MIN": "",
+          "MAX": "",
+          "OPERATIONS": 6,
+          "TAB_ORDER": 0,
+          "TYPE": "ACTION"
+        }
+      }
+    }
+  ],
+  "paramsets": [
+    {
+      "name": "%ADDRESS%:0",
+      "type": "MASTER",
+      "value": {}
+    },
+    {
+      "name": "%ADDRESS%:0",
+      "type": "VALUES",
+      "value": {
+        "UNREACH": false,
+        "STICKY_UNREACH": false,
+        "CONFIG_PENDING": false,
+        "LOWBAT": false
+      }
+    },
+    {
+      "name": "%ADDRESS%:1|%ADDRESS%:2|%ADDRESS%:3|%ADDRESS%:4",
+      "type": "MASTER",
+      "value": {
+        "AES_ACTIVE": true,
+        "DBL_PRESS_TIME": {
+          "explicitDouble": 0
+        },
+        "LONG_PRESS_TIME": {
+          "explicitDouble": 0.4
+        },
+        "CMD_PRESS_SHORT": "",
+        "CMD_PRESS_LONG": ""
+      }
+    },
+    {
+      "name": "%ADDRESS%:1|%ADDRESS%:2|%ADDRESS%:3|%ADDRESS%:4",
+      "type": "VALUES",
+      "value": {
+        "PRESS_SHORT": false
+      }
+    }
+  ]
+}

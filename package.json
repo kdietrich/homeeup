@@ -1,0 +1,19 @@
+{
+  "name": "homeeUp",
+  "version": "0.1.0",
+  "description": "Use virtual devices in homee. <3",
+  "main": "dist/index.js",
+  "dependencies": {
+    "child_process": "^1.0.2",
+    "homematic-xmlrpc": "^1.0.2",
+    "logplease": "^1.2.14",
+    "node-persist": "^2.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["homeeup","homee","homematic","ccu2"],
+  "author": "Kevin Dietrich",
+  "license": "MIT"
+}
