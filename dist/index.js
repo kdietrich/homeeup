@@ -20,6 +20,7 @@ var HomeeUp = (function () {
         logger.info('running on node %s', process.version);
         logger.info('======================================');
         logger.debug('start()');
+        logger.info("Config file location: %s", __dirname.replace('dist', 'config.js'));
         this.hostAddress = config.hostAddress;
         this.xmlServer = new XMLRPCServer_1.XMLRPCServer(this.hostAddress, this.hostPort);
         this._loadPlugins();
@@ -38,5 +39,7 @@ var HomeeUp = (function () {
     };
     return HomeeUp;
 }());
-var homeeUp = new HomeeUp();
-homeeUp.start();
+module.exports = function () {
+    var homeeUp = new HomeeUp();
+    homeeUp.start();
+}();

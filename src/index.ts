@@ -24,6 +24,8 @@ class HomeeUp {
         logger.info('======================================');
         logger.debug('start()');
 
+        logger.info("Config file location: %s", __dirname.replace('dist', 'config.js'));
+
         this.hostAddress = config.hostAddress;
         this.xmlServer = new XMLRPCServer(this.hostAddress, this.hostPort);
 
@@ -48,5 +50,7 @@ class HomeeUp {
 
 }
 
-let homeeUp = new HomeeUp();
-homeeUp.start();
+export = function() {
+    let homeeUp = new HomeeUp();
+    homeeUp.start();
+}()
