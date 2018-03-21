@@ -45,7 +45,7 @@ This sample config exposes two switches to homee: HTTPSwitch and CMDSwitch. The 
 
 ## Troubleshooting
 
-Feel free to open an issue if you experience any issues. However please start homeeUp using `LOG=debug node index.js` to generate debug output and attach it to your issue.
+Feel free to open an issue if you experience any issues. However please start homeeUp using `LOG=debug node dist/index.js` to generate debug output and attach it to your issue.
 
 ## Changes
 

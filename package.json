@@ -1,5 +1,5 @@
 {
-  "name": "homeeUp",
+  "name": "homeeup",
   "version": "0.1.0",
   "description": "Use virtual devices in homee. <3",
   "main": "dist/index.js",
@@ -13,7 +13,20 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["homeeup","homee","homematic","ccu2"],
+  "keywords": [
+    "homeeup",
+    "homee",
+    "homematic",
+    "ccu2"
+  ],
   "author": "Kevin Dietrich",
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kdietrich/homeeup.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kdietrich/homeeup/issues"
+  },
+  "homepage": "https://github.com/kdietrich/homeeup#readme"
 }
