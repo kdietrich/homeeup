@@ -21,6 +21,9 @@
   ],
   "author": "Kevin Dietrich",
   "license": "MIT",
+  "bin": {
+    "homeeup": "bin/homeeup"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kdietrich/homeeup.git"
