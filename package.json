@@ -1,6 +1,6 @@
 {
   "name": "homeeup",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Use virtual devices in homee. <3",
   "main": "dist/index.js",
   "dependencies": {

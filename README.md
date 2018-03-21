@@ -49,6 +49,9 @@ Feel free to open an issue if you experience any issues. However please start ho
 
 ## Changes
 
+#### v0.1.1 (2018-03-21)
+- Installation made easier
+
 #### v0.1.0 (2018-03-21)
 - First version
 

@@ -18,7 +18,7 @@ class HomeeUp {
     xmlServer;
 
     start() {
-        logger.info('Launching HomeeUp v0.1.0');
+        logger.info('Launching HomeeUp v0.1.1');
         logger.info('2018 by kdietrich');
         logger.info('running on node %s', process.version);
         logger.info('======================================');
