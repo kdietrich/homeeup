@@ -2,6 +2,7 @@
 var Logger = require('logplease');
 var logger = Logger.create('HMLCSW1');
 var fs = require('fs');
+var path = require('path');
 var HMLCSW1 = (function () {
     function HMLCSW1() {
         this.templatePath = 'HM-LC-SW1.json';
@@ -12,7 +13,8 @@ var HMLCSW1 = (function () {
         this.deviceName = pluginParams.deviceName;
         this.plugin = plugin;
         this.server = server;
-        var file = fs.readFileSync('src/devices/' + this.templatePath, 'utf8');
+        var jsonPath = path.join(path.dirname(fs.realpathSync(__filename)), '../../src/devices/');
+        var file = fs.readFileSync(jsonPath + this.templatePath, 'utf8');
         file = file.replace(/%ADDRESS%/g, this.deviceName);
         file = file.replace(/%STATE1%/g, this.state1);
         this.template = JSON.parse(file);
