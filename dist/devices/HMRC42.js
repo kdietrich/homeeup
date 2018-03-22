@@ -1,5 +1,6 @@
 "use strict";
 var Logger = require('logplease');
+var path = require('path');
 var logger = Logger.create('HMRC42');
 var fs = require('fs');
 var HMRC42 = (function () {

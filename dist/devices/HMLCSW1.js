@@ -54,7 +54,7 @@ var HMLCSW1 = (function () {
                     logger.info('Property STATE of device %s set to %s.', ps[0], ps[2][key]);
                     this.server.broadcastEvent(ps[0], key, ps[2][key]);
                     this.server.broadcastEvent(ps[0], 'WORKING', false);
-                    if (ps[2][key] === true)
+                    if (ps[2][key] === true || ps[2][key] === 1)
                         this.plugin.onTurnOn();
                     else
                         this.plugin.onTurnOff();
