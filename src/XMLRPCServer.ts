@@ -2,6 +2,7 @@ const Logger = require('logplease');
 const xmlrpc = require('homematic-xmlrpc');
 const logger = Logger.create('XMLRPCServer');
 const storage = require('node-persist');
+const os = require('os');
 
 export class XMLRPCServer {
 
@@ -93,7 +94,7 @@ export class XMLRPCServer {
             this.consumers.push({'host': host, 'port': port, 'id': params[1], 'client': client});
             logger.info('Initiated new consumer: host %s port %s path %s id %s', host, port, path, params[1]);
 
-            storage.initSync();
+            storage.initSync({dir: os.homedir() + '/.homeeup/persist/'});
             storage.setItemSync('homeeup-consumers', this.consumers);
         }
         callback(null,[]);
@@ -237,7 +238,7 @@ export class XMLRPCServer {
         logger.debug('_initConsumers()');
         var that = this;
 
-        storage.initSync();
+        storage.initSync({dir: os.homedir() + '/.homeeup/persist/'});
         let consumers = storage.getItemSync('homeeup-consumers');
         if(!consumers) {
             logger.info('No stored consumers found.');
