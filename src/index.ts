@@ -4,10 +4,11 @@ const config = require('../config');
 import { XMLRPCServer } from "./XMLRPCServer";
 import { SimpleHTTPPlugin } from "./plugins/SimpleHTTPPlugin";
 import { SimpleCMDPlugin } from "./plugins/SimpleCMDPlugin";
+import { SimpleMQTTPlugin } from "./plugins/SimpleMQTTPlugin";
 import { HMRC42 } from "./devices/HMRC42";
 import { HMLCSW1 } from "./devices/HMLCSW1";
 
-const pluginPresets = { SimpleHTTPPlugin, SimpleCMDPlugin };
+const pluginPresets = { SimpleHTTPPlugin, SimpleCMDPlugin, SimpleMQTTPlugin };
 const devicePresets = { HMRC42, HMLCSW1 };
 
 class HomeeUp {
