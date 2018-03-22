@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "dependencies": {
     "child_process": "^1.0.2",
+    "fritzapi": "^0.10.3",
     "homematic-xmlrpc": "^1.0.2",
     "logplease": "^1.2.14",
     "mqtt": "^2.16.0",

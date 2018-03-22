@@ -6,10 +6,11 @@ var os = require('os');
 var XMLRPCServer_1 = require("./XMLRPCServer");
 var SimpleHTTPPlugin_1 = require("./plugins/SimpleHTTPPlugin");
 var SimpleCMDPlugin_1 = require("./plugins/SimpleCMDPlugin");
+var FritzBoxPlugin_1 = require("./plugins/FritzBoxPlugin");
 var SimpleMQTTPlugin_1 = require("./plugins/SimpleMQTTPlugin");
 var HMRC42_1 = require("./devices/HMRC42");
 var HMLCSW1_1 = require("./devices/HMLCSW1");
-var pluginPresets = { SimpleHTTPPlugin: SimpleHTTPPlugin_1.SimpleHTTPPlugin, SimpleCMDPlugin: SimpleCMDPlugin_1.SimpleCMDPlugin, SimpleMQTTPlugin: SimpleMQTTPlugin_1.SimpleMQTTPlugin };
+var pluginPresets = { SimpleHTTPPlugin: SimpleHTTPPlugin_1.SimpleHTTPPlugin, SimpleCMDPlugin: SimpleCMDPlugin_1.SimpleCMDPlugin, FritzBoxPlugin: FritzBoxPlugin_1.FritzBoxPlugin, SimpleMQTTPlugin: SimpleMQTTPlugin_1.SimpleMQTTPlugin };
 var devicePresets = { HMRC42: HMRC42_1.HMRC42, HMLCSW1: HMLCSW1_1.HMLCSW1 };
 var HomeeUp = (function () {
     function HomeeUp() {
