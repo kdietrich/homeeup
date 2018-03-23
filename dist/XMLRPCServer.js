@@ -1,10 +1,11 @@
 "use strict";
+exports.__esModule = true;
 var Logger = require('logplease');
 var xmlrpc = require('homematic-xmlrpc');
 var logger = Logger.create('XMLRPCServer');
 var storage = require('node-persist');
 var os = require('os');
-var XMLRPCServer = (function () {
+var XMLRPCServer = /** @class */ (function () {
     function XMLRPCServer(host, port) {
         this.consumers = [];
         logger.debug('constructor(%s,%s)', host, port);

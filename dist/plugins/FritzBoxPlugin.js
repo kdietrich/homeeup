@@ -1,8 +1,9 @@
 "use strict";
+exports.__esModule = true;
 var Logger = require('logplease');
 var logger = Logger.create('FritzBoxPlugin');
 var Fritz = require('fritzapi').Fritz;
-var FritzBoxPlugin = (function () {
+var FritzBoxPlugin = /** @class */ (function () {
     function FritzBoxPlugin() {
         this.name = 'FritzBoxPlugin';
         this.deviceType = 'HMLCSW1';

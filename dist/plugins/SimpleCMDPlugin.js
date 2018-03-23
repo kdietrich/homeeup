@@ -1,8 +1,9 @@
 "use strict";
+exports.__esModule = true;
 var Logger = require('logplease');
 var logger = Logger.create('SimpleCMDPlugin');
 var exec = require('child_process').exec;
-var SimpleCMDPlugin = (function () {
+var SimpleCMDPlugin = /** @class */ (function () {
     function SimpleCMDPlugin() {
         this.name = 'SimpleCMDPlugin';
         this.deviceType = 'HMLCSW1';

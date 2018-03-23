@@ -1,15 +1,18 @@
 "use strict";
+exports.__esModule = true;
 var Logger = require('logplease');
 var logger = Logger.create('HMLCSW1');
 var fs = require('fs');
 var path = require('path');
-var HMLCSW1 = (function () {
+var HMLCSW1 = /** @class */ (function () {
     function HMLCSW1() {
         this.templatePath = 'HM-LC-SW1.json';
         this.state1 = false;
     }
     HMLCSW1.prototype.init = function (pluginParams, plugin, server) {
-        logger.debug('init(%s,%s,%s)', JSON.stringify(pluginParams), JSON.stringify(plugin), JSON.stringify(server));
+        //logger.debug('init(%s,%s,%s)', JSON.stringify(pluginParams), JSON.stringify(JSON.decycle(plugin)),  JSON.stringify(server));
+        // can't sringify circulat structures
+        logger.debug('init(%s,%s)', JSON.stringify(pluginParams), JSON.stringify(server));
         this.deviceName = pluginParams.deviceName;
         this.plugin = plugin;
         this.server = server;

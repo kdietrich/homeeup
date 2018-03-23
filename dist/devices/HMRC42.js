@@ -1,9 +1,10 @@
 "use strict";
+exports.__esModule = true;
 var Logger = require('logplease');
 var path = require('path');
 var logger = Logger.create('HMRC42');
 var fs = require('fs');
-var HMRC42 = (function () {
+var HMRC42 = /** @class */ (function () {
     function HMRC42() {
         this.templatePath = 'HM-RC-4-2.json';
     }

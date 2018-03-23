@@ -1,8 +1,9 @@
 "use strict";
+exports.__esModule = true;
 var Logger = require('logplease');
 var logger = Logger.create('SimpleMQTTPlugin');
 var mqtt = require('mqtt');
-var SimpleMQTTPlugin = (function () {
+var SimpleMQTTPlugin = /** @class */ (function () {
     function SimpleMQTTPlugin() {
         this.name = 'SimpleMQTTPlugin';
         this.deviceType = 'HMLCSW1';

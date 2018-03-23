@@ -12,7 +12,7 @@ var HMRC42_1 = require("./devices/HMRC42");
 var HMLCSW1_1 = require("./devices/HMLCSW1");
 var pluginPresets = { SimpleHTTPPlugin: SimpleHTTPPlugin_1.SimpleHTTPPlugin, SimpleCMDPlugin: SimpleCMDPlugin_1.SimpleCMDPlugin, FritzBoxPlugin: FritzBoxPlugin_1.FritzBoxPlugin, SimpleMQTTPlugin: SimpleMQTTPlugin_1.SimpleMQTTPlugin };
 var devicePresets = { HMRC42: HMRC42_1.HMRC42, HMLCSW1: HMLCSW1_1.HMLCSW1 };
-var HomeeUp = (function () {
+var HomeeUp = /** @class */ (function () {
     function HomeeUp() {
         this.hostPort = 2001;
         this.devices = [];

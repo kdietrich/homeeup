@@ -1,8 +1,9 @@
 "use strict";
+exports.__esModule = true;
 var Logger = require('logplease');
 var logger = Logger.create('SimpleHTTPPlugin');
 var http = require('http');
-var SimpleHTTPPlugin = (function () {
+var SimpleHTTPPlugin = /** @class */ (function () {
     function SimpleHTTPPlugin() {
         this.name = 'SimpleHTTPPlugin';
         this.deviceType = 'HMLCSW1';
