@@ -18,7 +18,7 @@ var HomeeUp = /** @class */ (function () {
         this.devices = [];
     }
     HomeeUp.prototype.start = function () {
-        logger.info('Launching HomeeUp v0.1.1');
+        logger.info('Launching HomeeUp v0.1.2');
         logger.info('2018 by kdietrich');
         logger.info('running on node %s', process.version);
         logger.info('======================================');
