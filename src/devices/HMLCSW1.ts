@@ -13,7 +13,10 @@ export class HMLCSW1 {
     state1 = false;
 
     init(pluginParams, plugin, server) {
-        logger.debug('init(%s,%s,%s)', JSON.stringify(pluginParams), JSON.stringify(plugin),  JSON.stringify(server));
+        //logger.debug('init(%s,%s,%s)', JSON.stringify(pluginParams), JSON.stringify(JSON.decycle(plugin)),  JSON.stringify(server));
+	// can't sringify circulat structures
+        logger.debug('init(%s,%s)', JSON.stringify(pluginParams), JSON.stringify(server));
+	
         this.deviceName = pluginParams.deviceName;
         this.plugin = plugin;
         this.server = server;
