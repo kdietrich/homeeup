@@ -24,7 +24,7 @@ var SimpleMQTTPlugin = /** @class */ (function () {
         else {
             this.mqttOffTopic = p.pluginParams.mqttOnTopic;
         }
-        var device = new HMLCSW1_1.HMLCSW1();
+        var device = new HMLCSW1_1.HMLCSW1(p.deviceName);
         device.events.on('onTurnOn', this.onTurnOn.bind(this));
         device.events.on('onTurnOff', this.onTurnOff.bind(this));
         this.devices.push(device);

@@ -14,7 +14,7 @@ var FritzBoxPlugin = /** @class */ (function () {
         this.ipAddress = p.pluginParams.ipAddress;
         this.user = p.pluginParams.user;
         this.password = p.pluginParams.password;
-        var device = new HMLCSW1_1.HMLCSW1();
+        var device = new HMLCSW1_1.HMLCSW1(p.deviceName);
         device.events.on('onTurnOn', this.onTurnOn.bind(this));
         device.events.on('onTurnOff', this.onTurnOff.bind(this));
         this.devices.push(device);

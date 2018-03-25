@@ -6,16 +6,16 @@ var fs = require('fs');
 var path = require('path');
 var EventEmitter = require('events');
 var HMLCSW1 = /** @class */ (function () {
-    function HMLCSW1() {
+    function HMLCSW1(deviceName) {
         this.templatePath = 'HM-LC-SW1.json';
         this.events = new EventEmitter();
         this.state1 = false;
+        this.deviceName = deviceName;
     }
     HMLCSW1.prototype.init = function (pluginParams, plugin, server) {
         //logger.debug('init(%s,%s,%s)', JSON.stringify(pluginParams), JSON.stringify(JSON.decycle(plugin)),  JSON.stringify(server));
         // can't sringify circulat structures
         logger.debug('init(%s,%s)', JSON.stringify(pluginParams), JSON.stringify(server));
-        this.deviceName = pluginParams.deviceName;
         this.plugin = plugin;
         this.server = server;
         var jsonPath = path.join(path.dirname(fs.realpathSync(__filename)), '../../src/devices/');

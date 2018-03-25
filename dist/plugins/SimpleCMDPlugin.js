@@ -15,7 +15,7 @@ var SimpleCMDPlugin = /** @class */ (function () {
         this.offCmd = p.pluginParams.offCmd;
         this.statusCmd = p.pluginParams.statusCmd;
         this.checkInterval = p.pluginParams.checkInterval;
-        var device = new HMLCSW1_1.HMLCSW1();
+        var device = new HMLCSW1_1.HMLCSW1(p.deviceName);
         device.events.on('onTurnOn', this.onTurnOn.bind(this));
         device.events.on('onTurnOff', this.onTurnOff.bind(this));
         this.devices.push(device);

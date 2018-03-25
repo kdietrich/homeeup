@@ -6,14 +6,14 @@ var logger = Logger.create('HMRC42');
 var fs = require('fs');
 var EventEmitter = require('events');
 var HMRC42 = /** @class */ (function () {
-    function HMRC42() {
+    function HMRC42(deviceName) {
         this.templatePath = 'HM-RC-4-2.json';
         this.events = new EventEmitter();
+        this.deviceName = deviceName;
     }
     HMRC42.prototype.init = function (plugin) {
         logger.debug('init(%s)', JSON.stringify(plugin));
         this.plugin = plugin;
-        this.deviceName = plugin.deviceName;
         var jsonPath = path.join(path.dirname(fs.realpathSync(__filename)), '../../src/devices/');
         var file = fs.readFileSync(jsonPath + this.templatePath, 'utf8');
         file = file.replace(/%ADDRESS%/g, this.deviceName);

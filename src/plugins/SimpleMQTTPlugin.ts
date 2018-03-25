@@ -32,7 +32,7 @@ export class SimpleMQTTPlugin implements PluginInterface {
             this.mqttOffTopic = p.pluginParams.mqttOnTopic;
         }
 
-        let device = new HMLCSW1();
+        let device = new HMLCSW1(p.deviceName);
         device.events.on('onTurnOn', this.onTurnOn.bind(this));
         device.events.on('onTurnOff', this.onTurnOff.bind(this));
         this.devices.push(device);

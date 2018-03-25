@@ -12,10 +12,13 @@ export class HMRC42 {
     template;
     plugin;
 
+    constructor(deviceName: String) {
+        this.deviceName = deviceName;
+    }
+
     init(plugin) {
         logger.debug('init(%s)', JSON.stringify(plugin));
         this.plugin = plugin;
-        this.deviceName = plugin.deviceName;
 
         var jsonPath = path.join(path.dirname(fs.realpathSync(__filename)), '../../src/devices/');
         var file = fs.readFileSync(jsonPath + this.templatePath, 'utf8');
