@@ -4,9 +4,11 @@ var Logger = require('logplease');
 var path = require('path');
 var logger = Logger.create('HMRC42');
 var fs = require('fs');
+var EventEmitter = require('events');
 var HMRC42 = /** @class */ (function () {
     function HMRC42() {
         this.templatePath = 'HM-RC-4-2.json';
+        this.events = new EventEmitter();
     }
     HMRC42.prototype.init = function (plugin) {
         logger.debug('init(%s)', JSON.stringify(plugin));

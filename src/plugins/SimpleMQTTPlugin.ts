@@ -2,12 +2,12 @@ const Logger = require('logplease');
 const logger = Logger.create('SimpleMQTTPlugin');
 const mqtt = require('mqtt')
 import { PluginInterface } from "./PluginInterface";
+import { HMLCSW1 } from "../devices/HMLCSW1";
 
 export class SimpleMQTTPlugin implements PluginInterface {
 
     name: String = 'SimpleMQTTPlugin';
-    deviceType: String = 'HMLCSW1';
-    device;
+    devices = [];
 
     //config
     mqttServer: String;
@@ -20,9 +20,8 @@ export class SimpleMQTTPlugin implements PluginInterface {
     mqttAvailable: Boolean = false
     mqttConnection: any = null
 
-    init(p, device) {
-        logger.debug('init(%s,%s)', JSON.stringify(p), JSON.stringify(device));
-        this.device = device;
+    init(p) {
+        logger.debug('init(%s)', JSON.stringify(p));
         this.mqttServer = p.pluginParams.mqttServer;
         this.mqttUserName = p.pluginParams.mqttUserName;
         this.mqttPassword = p.pluginParams.mqttPassword;
@@ -30,25 +29,32 @@ export class SimpleMQTTPlugin implements PluginInterface {
         if (p.pluginParams.mqttOffTopic) {
             this.mqttOffTopic = p.pluginParams.mqttOffTopic;
         } else {
-            this.mqttOffTopic = p.pluginParams.mqttOnTopic;            
+            this.mqttOffTopic = p.pluginParams.mqttOnTopic;
         }
+
+        let device = new HMLCSW1();
+        device.events.on('onTurnOn', this.onTurnOn.bind(this));
+        device.events.on('onTurnOff', this.onTurnOff.bind(this));
+        this.devices.push(device);
 
         var that = this;
 
         this.mqttConnect();
-        
+
         logger.info('Plugin %s initialized.', this.name);
+
+        return this.devices;
     }
 
-    onTurnOn() {
+    onTurnOn(device) {
         logger.debug('onTurnOn()');
-        logger.info('Device %s turned on.', this.device.deviceName);
+        logger.info('Device %s turned on.', device.deviceName);
         this.mqttPublish(this.mqttOnTopic, '1')
     }
 
-    onTurnOff() {
+    onTurnOff(device) {
         logger.debug('onTurnOff()');
-        logger.info('Device %s turned off.', this.device.deviceName);
+        logger.info('Device %s turned off.', device.deviceName);
         this.mqttPublish(this.mqttOffTopic, '0')
     }
 
@@ -62,7 +68,7 @@ export class SimpleMQTTPlugin implements PluginInterface {
             this.mqttConnection = mqtt.connect('mqtt://' + this.mqttServer, {})
         }
 
-        var that = this;        
+        var that = this;
         this.mqttConnection.on('connect', function () {
             logger.info('MQTT connected');
             that.mqttAvailable = true
@@ -83,7 +89,7 @@ export class SimpleMQTTPlugin implements PluginInterface {
             this.mqttConnection.publish(mqttTopic, mqttMessage)
         }
     }
-    
+
     mqttSubscribe(mqttTopic) {
         if (this.mqttAvailable) {
             this.mqttConnection.subscribe(mqttTopic, null, function (err) {
@@ -92,26 +98,27 @@ export class SimpleMQTTPlugin implements PluginInterface {
                 } else {
                     logger.info('"subscribe: "' + mqttTopic + '"')
                 }
-            })    
+            })
         }
     }
 
     handleIncommingSubscribedMqttMessage(that, topic, message) {
         logger.info("subscribed mqtt message received:", topic, message.toString())
+        let device = that.devices[0]
         let val
         let messageString = message.toString().toLowerCase()
         if (messageString === 'true' || messageString === '1') {
             val = 1
         } else {
-            val = 0            
+            val = 0
         }
 
-        if (val !== that.device.state1) {
-            logger.info('Status of %s changed to %s.', that.device.deviceName, message);
-            that.device.stateChanged(1, val);
+        if (val !== device.state1) {
+            logger.info('Status of %s changed to %s.', device.deviceName, message);
+            device.stateChanged(1, val);
         }
         else {
-            logger.info('Status of %s has not changed.', that.device.deviceName);
+            logger.info('Status of %s has not changed.', device.deviceName);
         }
     }
 }

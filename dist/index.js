@@ -8,10 +8,7 @@ var SimpleHTTPPlugin_1 = require("./plugins/SimpleHTTPPlugin");
 var SimpleCMDPlugin_1 = require("./plugins/SimpleCMDPlugin");
 var FritzBoxPlugin_1 = require("./plugins/FritzBoxPlugin");
 var SimpleMQTTPlugin_1 = require("./plugins/SimpleMQTTPlugin");
-var HMRC42_1 = require("./devices/HMRC42");
-var HMLCSW1_1 = require("./devices/HMLCSW1");
 var pluginPresets = { SimpleHTTPPlugin: SimpleHTTPPlugin_1.SimpleHTTPPlugin, SimpleCMDPlugin: SimpleCMDPlugin_1.SimpleCMDPlugin, FritzBoxPlugin: FritzBoxPlugin_1.FritzBoxPlugin, SimpleMQTTPlugin: SimpleMQTTPlugin_1.SimpleMQTTPlugin };
-var devicePresets = { HMRC42: HMRC42_1.HMRC42, HMLCSW1: HMLCSW1_1.HMLCSW1 };
 var HomeeUp = /** @class */ (function () {
     function HomeeUp() {
         this.hostPort = 2001;
@@ -47,10 +44,11 @@ var HomeeUp = /** @class */ (function () {
         var that = this;
         that.config.plugins.forEach(function (p) {
             var plugin = new pluginPresets[p.type]();
-            var device = new devicePresets[plugin.deviceType]();
-            plugin.init(p, device);
-            device.init(p, plugin, that.xmlServer);
-            that.devices.push(device);
+            var devices = plugin.init(p);
+            for (var i = 0; i < devices.length; i++) {
+                devices[i].init(p, plugin, that.xmlServer);
+            }
+            that.devices = that.devices.concat(devices);
         });
     };
     return HomeeUp;

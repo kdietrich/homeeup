@@ -7,11 +7,8 @@ import { SimpleHTTPPlugin } from "./plugins/SimpleHTTPPlugin";
 import { SimpleCMDPlugin } from "./plugins/SimpleCMDPlugin";
 import { FritzBoxPlugin } from "./plugins/FritzBoxPlugin";
 import { SimpleMQTTPlugin } from "./plugins/SimpleMQTTPlugin";
-import { HMRC42 } from "./devices/HMRC42";
-import { HMLCSW1 } from "./devices/HMLCSW1";
 
 const pluginPresets = { SimpleHTTPPlugin, SimpleCMDPlugin, FritzBoxPlugin, SimpleMQTTPlugin };
-const devicePresets = { HMRC42, HMLCSW1 };
 
 class HomeeUp {
 
@@ -56,13 +53,13 @@ class HomeeUp {
         logger.debug('_loadPlugins()');
         var that = this;
         that.config.plugins.forEach(function(p) {
+            let plugin = new pluginPresets[p.type]();
+            let devices = plugin.init(p);
+            for(let i=0; i<devices.length; i++) {
+                devices[i].init(p, plugin, that.xmlServer);
+            }
 
-            var plugin = new pluginPresets[p.type]();
-            var device = new devicePresets[plugin.deviceType]();
-            plugin.init(p, device);
-            device.init(p, plugin, that.xmlServer);
-
-            that.devices.push(device);
+            that.devices = that.devices.concat(devices);
         });
     }
 

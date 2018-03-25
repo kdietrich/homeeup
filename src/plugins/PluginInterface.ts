@@ -2,11 +2,11 @@
 export interface PluginInterface {
 
     name: String;
-    deviceType: String;
-    device;
+    //deviceType: String;
+    //device;
 
-    init(initParams, device) : void;
+    init(initParams) : any[];
 
-    onTurnOn() : void;
-    onTurnOff() : void;
+    //onTurnOn() : void;
+    //onTurnOff() : void;
 }

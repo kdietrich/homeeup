@@ -1,38 +1,44 @@
 const Logger = require('logplease');
 const logger = Logger.create('SimpleCMDPlugin');
 import { PluginInterface } from "./PluginInterface";
+import { HMLCSW1 } from "../devices/HMLCSW1";
 const { exec } = require('child_process');
 
 export class SimpleCMDPlugin implements PluginInterface {
 
     name: String = 'SimpleCMDPlugin';
-    deviceType: String = 'HMLCSW1';
-    device;
+    devices = [];
     onCmd: String;
     offCmd: String;
     statusCmd: String;
     checkInterval: number;
 
-    init(p, device) {
-        logger.debug('init(%s,%s)', JSON.stringify(p), JSON.stringify(device));
-        this.device = device;
+    init(p) {
+        logger.debug('init(%s)', JSON.stringify(p));
         this.onCmd = p.pluginParams.onCmd;
         this.offCmd = p.pluginParams.offCmd;
         this.statusCmd = p.pluginParams.statusCmd;
         this.checkInterval = p.pluginParams.checkInterval;
 
+        let device = new HMLCSW1();
+        device.events.on('onTurnOn', this.onTurnOn.bind(this));
+        device.events.on('onTurnOff', this.onTurnOff.bind(this));
+        this.devices.push(device);
+
         var that = this;
         setInterval(function() {
-            that._checkStatus(false);
+            that._checkStatus(device, false);
         }, that.checkInterval);
-        that._checkStatus(true);
+        that._checkStatus(device, true);
 
         logger.info('Plugin %s initialized.', this.name);
+
+        return this.devices;
     }
 
-    onTurnOn() {
+    onTurnOn(device) {
         logger.debug('onTurnOn()');
-        logger.info('Device %s turned on.', this.device.deviceName);
+        logger.info('Device %s turned on.', device.deviceName);
         logger.info('Executing onCmd.');
         exec(this.onCmd, function(err, stdout, stderr) {
             if(err) {
@@ -43,9 +49,9 @@ export class SimpleCMDPlugin implements PluginInterface {
         });
     }
 
-    onTurnOff() {
+    onTurnOff(device) {
         logger.debug('onTurnOff()');
-        logger.info('Device %s turned off.', this.device.deviceName);
+        logger.info('Device %s turned off.', device.deviceName);
         logger.info('Executing offCmd.');
         exec(this.offCmd, function(err, stdout, stderr) {
             if(err) {
@@ -56,22 +62,22 @@ export class SimpleCMDPlugin implements PluginInterface {
         });
     }
 
-    _checkStatus(forceRefresh) {
+    _checkStatus(device, forceRefresh) {
         logger.debug('_checkStatus(%s)', forceRefresh);
         var that = this;
-        logger.info('Checking status of %s.', that.device.deviceName);
+        logger.info('Checking status of %s.', device.deviceName);
         exec(that.statusCmd, function(err, stdout, stderr) {
             if(err) {
                 logger.error('statusCmd failed with error %s', err);
                 return;
             }
             let val = stdout==='0\n';
-            if(val !== that.device.state1 || forceRefresh) {
-                logger.info('Status of %s changed to %s.', that.device.deviceName, val);
-                that.device.stateChanged(1, val);
+            if(val !== device.state1 || forceRefresh) {
+                logger.info('Status of %s changed to %s.', device.deviceName, val);
+                device.stateChanged(1, val);
             }
             else {
-                logger.info('Status of %s has not changed.', that.device.deviceName);
+                logger.info('Status of %s has not changed.', device.deviceName);
             }
         });
     }

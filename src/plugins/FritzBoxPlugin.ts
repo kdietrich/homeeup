@@ -1,39 +1,45 @@
 const Logger = require('logplease');
 const logger = Logger.create('FritzBoxPlugin');
 import { PluginInterface } from "./PluginInterface";
+import { HMLCSW1 } from "../devices/HMLCSW1";
 const Fritz = require('fritzapi').Fritz;
 
 export class FritzBoxPlugin implements PluginInterface {
 
     name: String = 'FritzBoxPlugin';
-    deviceType: String = 'HMLCSW1';
-    device;
+    devices = [];
     ipAddress: String;
     user: String;
     password: String;
     fritzBox;
 
-    init(p, device) {
-        logger.debug('init(%s,%s)', JSON.stringify(p), JSON.stringify(device));
-        this.device = device;
+    init(p) {
+        logger.debug('init(%s)', JSON.stringify(p));
         this.ipAddress = p.pluginParams.ipAddress;
         this.user = p.pluginParams.user;
         this.password = p.pluginParams.password;
+
+        let device = new HMLCSW1();
+        device.events.on('onTurnOn', this.onTurnOn.bind(this));
+        device.events.on('onTurnOff', this.onTurnOff.bind(this));
+        this.devices.push(device);
 
         this.fritzBox = new Fritz(this.user, this.password, this.ipAddress);
 
         var that = this;
         setInterval(function() {
-            that._checkStatus(false);
+            that._checkStatus(device, false);
         }, 10000);
-        that._checkStatus(true);
+        that._checkStatus(device, true);
 
         logger.info('Plugin %s initialized.', this.name);
+
+        return this.devices;
     }
 
-    onTurnOn() {
+    onTurnOn(device) {
         logger.debug('onTurnOn()');
-        logger.info('Device %s turned on.', this.device.deviceName);
+        logger.info('Device %s turned on.', device.deviceName);
         logger.info('Switching guest wifi on.');
 
         this.fritzBox.setGuestWlan(true).then(function(res) {
@@ -41,9 +47,9 @@ export class FritzBoxPlugin implements PluginInterface {
         });
     }
 
-    onTurnOff() {
+    onTurnOff(device) {
         logger.debug('onTurnOff()');
-        logger.info('Device %s turned off.', this.device.deviceName);
+        logger.info('Device %s turned off.', device.deviceName);
         logger.info('Switching guest wifi off.');
 
         this.fritzBox.setGuestWlan(false).then(function(res) {
@@ -51,18 +57,18 @@ export class FritzBoxPlugin implements PluginInterface {
         });
     }
 
-    _checkStatus(forceRefresh) {
+    _checkStatus(device, forceRefresh) {
         logger.debug('_checkStatus(%s)', forceRefresh);
         var that = this;
-        logger.info('Checking status of %s.', that.device.deviceName);
+        logger.info('Checking status of %s.', device.deviceName);
 
         this.fritzBox.getGuestWlan().then(function(res) {
-            if(res.activate_guest_access !== that.device.state1 || forceRefresh) {
-                logger.info('Status of %s changed to %s.', that.device.deviceName, res.activate_guest_access);
-                that.device.stateChanged(1, res.activate_guest_access);
+            if(res.activate_guest_access !== device.state1 || forceRefresh) {
+                logger.info('Status of %s changed to %s.', device.deviceName, res.activate_guest_access);
+                device.stateChanged(1, res.activate_guest_access);
             }
             else {
-                logger.info('Status of %s has not changed.', that.device.deviceName);
+                logger.info('Status of %s has not changed.', device.deviceName);
             }
         });
     }

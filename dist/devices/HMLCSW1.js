@@ -4,9 +4,11 @@ var Logger = require('logplease');
 var logger = Logger.create('HMLCSW1');
 var fs = require('fs');
 var path = require('path');
+var EventEmitter = require('events');
 var HMLCSW1 = /** @class */ (function () {
     function HMLCSW1() {
         this.templatePath = 'HM-LC-SW1.json';
+        this.events = new EventEmitter();
         this.state1 = false;
     }
     HMLCSW1.prototype.init = function (pluginParams, plugin, server) {
@@ -50,6 +52,7 @@ var HMLCSW1 = /** @class */ (function () {
     };
     HMLCSW1.prototype.putParamset = function (ps) {
         logger.debug('putParamset(%s)', ps);
+        var that = this;
         for (var key in ps[2]) {
             if (ps[2].hasOwnProperty(key)) {
                 if (key == 'STATE') {
@@ -58,9 +61,9 @@ var HMLCSW1 = /** @class */ (function () {
                     this.server.broadcastEvent(ps[0], key, ps[2][key]);
                     this.server.broadcastEvent(ps[0], 'WORKING', false);
                     if (ps[2][key] === true || ps[2][key] === 1)
-                        this.plugin.onTurnOn();
+                        this.events.emit('onTurnOn', that);
                     else
-                        this.plugin.onTurnOff();
+                        this.events.emit('onTurnOff', that);
                 }
             }
         }

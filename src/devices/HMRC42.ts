@@ -2,11 +2,13 @@ const Logger = require('logplease');
 var path = require('path')
 const logger = Logger.create('HMRC42');
 var fs = require('fs');
+const EventEmitter = require('events');
 
 export class HMRC42 {
 
     templatePath: String = 'HM-RC-4-2.json';
     deviceName: String;
+    events = new EventEmitter();
     template;
     plugin;
 

@@ -1,12 +1,14 @@
 const Logger = require('logplease');
 const logger = Logger.create('HMLCSW1');
 var fs = require('fs');
-var path = require('path')
+var path = require('path');
+const EventEmitter = require('events');
 
 export class HMLCSW1 {
 
     templatePath: String = 'HM-LC-SW1.json';
     deviceName: String;
+    events = new EventEmitter();
     template;
     plugin;
     server;
@@ -16,7 +18,7 @@ export class HMLCSW1 {
         //logger.debug('init(%s,%s,%s)', JSON.stringify(pluginParams), JSON.stringify(JSON.decycle(plugin)),  JSON.stringify(server));
 	// can't sringify circulat structures
         logger.debug('init(%s,%s)', JSON.stringify(pluginParams), JSON.stringify(server));
-	
+
         this.deviceName = pluginParams.deviceName;
         this.plugin = plugin;
         this.server = server;
@@ -58,6 +60,7 @@ export class HMLCSW1 {
 
     putParamset(ps) {
         logger.debug('putParamset(%s)', ps);
+        let that = this;
         for(let key in ps[2]) {
             if(ps[2].hasOwnProperty(key)) {
                 if(key=='STATE') {
@@ -66,9 +69,9 @@ export class HMLCSW1 {
                     this.server.broadcastEvent(ps[0], key, ps[2][key]);
                     this.server.broadcastEvent(ps[0], 'WORKING', false);
                     if (ps[2][key] === true || ps[2][key] === 1)
-                        this.plugin.onTurnOn();
+                        this.events.emit('onTurnOn', that);
                     else
-                        this.plugin.onTurnOff();
+                        this.events.emit('onTurnOff', that);
                 }
             }
         }
