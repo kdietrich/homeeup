@@ -13,8 +13,15 @@ export class SimpleMQTTPlugin implements PluginInterface {
     mqttServer: String;
     mqttUserName: String;
     mqttPassword: String;
-    mqttOnTopic: String;
-    mqttOffTopic: String;
+    mqttPublishOnTopic: String;
+    mqttPublishOffTopic: String;
+    mqttPublishhOnMessage: String;
+    mqttPublishOffMessage: String;
+    mqttSubscribeOnTopic: String;
+    mqttSubscribeOffTopic: String;
+    mqttSubscribeOnMessage: String;
+    mqttSubscribeOffMessage: String;
+    mqttMessageMode: String; //"value" or "state"    
 
     //states and vars
     mqttAvailable: Boolean = false
@@ -25,11 +32,34 @@ export class SimpleMQTTPlugin implements PluginInterface {
         this.mqttServer = p.pluginParams.mqttServer;
         this.mqttUserName = p.pluginParams.mqttUserName;
         this.mqttPassword = p.pluginParams.mqttPassword;
-        this.mqttOnTopic = p.pluginParams.mqttOnTopic;
-        if (p.pluginParams.mqttOffTopic) {
-            this.mqttOffTopic = p.pluginParams.mqttOffTopic;
+
+        this.mqttPublishOnTopic = p.pluginParams.mqttOnTopic;
+        this.mqttPublishOnTopic = p.pluginParams.mqttOffTopic;
+
+        this.mqttPublishOnTopic = p.pluginParams.mqttPublishOnTopic;
+
+        if (p.pluginParams.mqttPublishOffTopic) {
+            this.mqttPublishOffTopic = p.pluginParams.mqttPublishOffTopic;
         } else {
-            this.mqttOffTopic = p.pluginParams.mqttOnTopic;
+            this.mqttPublishOffTopic = this.mqttPublishOnTopic;
+        }
+
+        if (p.pluginParams.mqttSubscribeOnTopic) {
+            this.mqttSubscribeOnTopic = p.pluginParams.mqttSubscribeOnTopic;
+        } else {
+            this.mqttSubscribeOnTopic = this.mqttPublishOnTopic;
+        }
+
+        if (p.pluginParams.mqttSubscribeOffTopic) {
+            this.mqttSubscribeOffTopic = p.pluginParams.mqttSubscribeOffTopic;
+        } else {
+            this.mqttSubscribeOffTopic = this.mqttSubscribeOnTopic;
+        }
+
+        if (p.pluginParams.mqttMessageMode) {
+            this.mqttMessageMode = p.pluginParams.mqttMessageMode;
+        } else {
+            this.mqttMessageMode = "value"
         }
 
         let device = new HMLCSW1(p.deviceName);
@@ -49,13 +79,13 @@ export class SimpleMQTTPlugin implements PluginInterface {
     onTurnOn(device) {
         logger.debug('onTurnOn()');
         logger.info('Device %s turned on.', device.deviceName);
-        this.mqttPublish(this.mqttOnTopic, '1')
+        this.mqttPublish(this.mqttPublishOnTopic, '1')
     }
 
     onTurnOff(device) {
         logger.debug('onTurnOff()');
         logger.info('Device %s turned off.', device.deviceName);
-        this.mqttPublish(this.mqttOffTopic, '0')
+        this.mqttPublish(this.mqttPublishOffTopic, '0')
     }
 
     mqttConnect() {
@@ -72,9 +102,9 @@ export class SimpleMQTTPlugin implements PluginInterface {
         this.mqttConnection.on('connect', function () {
             logger.info('MQTT connected');
             that.mqttAvailable = true
-            that.mqttSubscribe(that.mqttOnTopic)
-            if (that.mqttOnTopic !== that.mqttOffTopic) {
-                that.mqttSubscribe(that.mqttOffTopic)
+            that.mqttSubscribe(that.mqttSubscribeOnTopic)
+            if (that.mqttSubscribeOnTopic !== that.mqttSubscribeOffTopic) {
+                that.mqttSubscribe(that.mqttSubscribeOffTopic)
             }
         })
 
@@ -106,11 +136,19 @@ export class SimpleMQTTPlugin implements PluginInterface {
         logger.info("subscribed mqtt message received:", topic, message.toString())
         let device = that.devices[0]
         let val
-        let messageString = message.toString().toLowerCase()
-        if (messageString === 'true' || messageString === '1') {
-            val = 1
+        if (that.mqttMessageMode == "value") {
+            let messageString = message.toString().toLowerCase()
+            if (messageString === 'true' || messageString === '1') {
+                val = 1
+            } else {
+                val = 0
+            }
         } else {
-            val = 0
+            if (topic === that.mqttSubscribeOnTopic) {
+                val = 1
+            } else {
+                val = 0
+            }
         }
 
         if (val !== device.state1) {
@@ -120,5 +158,5 @@ export class SimpleMQTTPlugin implements PluginInterface {
         else {
             logger.info('Status of %s has not changed.', device.deviceName);
         }
-    }
+    }    
 }
