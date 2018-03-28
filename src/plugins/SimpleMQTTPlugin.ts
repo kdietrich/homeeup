@@ -34,9 +34,11 @@ export class SimpleMQTTPlugin implements PluginInterface {
         this.mqttPassword = p.pluginParams.mqttPassword;
 
         this.mqttPublishOnTopic = p.pluginParams.mqttOnTopic;
-        this.mqttPublishOnTopic = p.pluginParams.mqttOffTopic;
+        this.mqttPublishOffTopic = p.pluginParams.mqttOffTopic;
 
-        this.mqttPublishOnTopic = p.pluginParams.mqttPublishOnTopic;
+        if (p.pluginParams.mqttPublishOnTopic) {
+            this.mqttPublishOnTopic = p.pluginParams.mqttPublishOnTopic;
+        }
 
         if (p.pluginParams.mqttPublishOffTopic) {
             this.mqttPublishOffTopic = p.pluginParams.mqttPublishOffTopic;
@@ -122,11 +124,12 @@ export class SimpleMQTTPlugin implements PluginInterface {
 
     mqttSubscribe(mqttTopic) {
         if (this.mqttAvailable) {
+            logger.info('"subscribing: "' + mqttTopic + '"')
             this.mqttConnection.subscribe(mqttTopic, null, function (err) {
                 if (err) {
-                    logger.error(err, '" subscribe: "' + mqttTopic + '"')
+                    logger.error(err, '" subscribing: "' + mqttTopic + '"')
                 } else {
-                    logger.info('"subscribe: "' + mqttTopic + '"')
+                    logger.info('"subscribed: "' + mqttTopic + '"')
                 }
             })
         }
