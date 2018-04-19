@@ -7,8 +7,9 @@ import { SimpleHTTPPlugin } from "./plugins/SimpleHTTPPlugin";
 import { SimpleCMDPlugin } from "./plugins/SimpleCMDPlugin";
 import { FritzBoxPlugin } from "./plugins/FritzBoxPlugin";
 import { SimpleMQTTPlugin } from "./plugins/SimpleMQTTPlugin";
+import { VorwerkKoboldPlugin } from "./plugins/VorwerkKoboldPlugin";
 
-const pluginPresets = { SimpleHTTPPlugin, SimpleCMDPlugin, FritzBoxPlugin, SimpleMQTTPlugin };
+const pluginPresets = { SimpleHTTPPlugin, SimpleCMDPlugin, FritzBoxPlugin, SimpleMQTTPlugin, VorwerkKoboldPlugin };
 
 class HomeeUp {
 

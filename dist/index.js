@@ -8,7 +8,8 @@ var SimpleHTTPPlugin_1 = require("./plugins/SimpleHTTPPlugin");
 var SimpleCMDPlugin_1 = require("./plugins/SimpleCMDPlugin");
 var FritzBoxPlugin_1 = require("./plugins/FritzBoxPlugin");
 var SimpleMQTTPlugin_1 = require("./plugins/SimpleMQTTPlugin");
-var pluginPresets = { SimpleHTTPPlugin: SimpleHTTPPlugin_1.SimpleHTTPPlugin, SimpleCMDPlugin: SimpleCMDPlugin_1.SimpleCMDPlugin, FritzBoxPlugin: FritzBoxPlugin_1.FritzBoxPlugin, SimpleMQTTPlugin: SimpleMQTTPlugin_1.SimpleMQTTPlugin };
+var VorwerkKoboldPlugin_1 = require("./plugins/VorwerkKoboldPlugin");
+var pluginPresets = { SimpleHTTPPlugin: SimpleHTTPPlugin_1.SimpleHTTPPlugin, SimpleCMDPlugin: SimpleCMDPlugin_1.SimpleCMDPlugin, FritzBoxPlugin: FritzBoxPlugin_1.FritzBoxPlugin, SimpleMQTTPlugin: SimpleMQTTPlugin_1.SimpleMQTTPlugin, VorwerkKoboldPlugin: VorwerkKoboldPlugin_1.VorwerkKoboldPlugin };
 var HomeeUp = /** @class */ (function () {
     function HomeeUp() {
         this.hostPort = 2001;

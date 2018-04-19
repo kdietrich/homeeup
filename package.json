@@ -9,6 +9,7 @@
     "homematic-xmlrpc": "^1.0.2",
     "logplease": "^1.2.14",
     "mqtt": "^2.16.0",
+    "node-kobold": "^0.1.2",
     "node-persist": "^2.1.0"
   },
   "devDependencies": {
