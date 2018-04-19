@@ -1,0 +1,190 @@
+{
+  "channels": [
+    {
+      "ADDRESS": "%ADDRESS%",
+      "CHILDREN": [
+        "%ADDRESS%:0",
+        "%ADDRESS%:1"
+      ],
+      "FIRMWARE": "1.0",
+      "FLAGS": 1,
+      "INTERFACE": "HOMEEUP",
+      "PARAMSETS": [],
+      "RF_ADDRESS": 0,
+      "ROAMING": 0,
+      "RX_MODE": 1,
+      "TYPE": "HM-Sec-MDIR-2",
+      "UPDATABLE": 1,
+      "VERSION": 41
+    },
+    {
+      "TYPE": "MAINTENANCE",
+      "ADDRESS": "%ADDRESS%:0",
+      "RF_ADDRESS": 0,
+      "PARENT": "%ADDRESS%",
+      "PARENT_TYPE": "HM-Sec-MDIR-2",
+      "INDEX": 0,
+      "UPDATABLE": true,
+      "FLAGS": 3,
+      "DIRECTION": 2,
+      "VERSION": 41,
+      "PARAMSETS": [
+        "MASTER",
+        "VALUES"
+      ],
+      "AES_ACTIVE": 0
+    },
+    {
+      "TYPE": "MOTION_DETECTOR",
+      "ADDRESS": "%ADDRESS%:1",
+      "RF_ADDRESS": 0,
+      "PARENT": "%ADDRESS%",
+      "PARENT_TYPE": "HM-Sec-MDIR-2",
+      "INDEX": 1,
+      "UPDATABLE": true,
+      "FLAGS": 1,
+      "DIRECTION": 0,
+      "VERSION": 41,
+      "PARAMSETS": [
+        "MASTER",
+        "VALUES",
+        "LINK"
+      ],
+      "AES_ACTIVE": 0
+    }
+  ],
+  "paramsetDescriptions": [
+    {
+      "name": "%ADDRESS%:0",
+      "type": "MASTER",
+      "value": {}
+    },
+    {
+      "name": "%ADDRESS%:0",
+      "type": "VALUES",
+      "value": {
+        "UNREACH": {
+          "FLAGS": 9,
+          "ID": "UNREACH",
+          "OPERATIONS": 5,
+          "TAB_ORDER": 0,
+          "TYPE": "BOOL"
+        },
+        "STICKY_UNREACH": {
+          "FLAGS": 24,
+          "ID": "STICKY_UNREACH",
+          "OPERATIONS": 7,
+          "TAB_ORDER": 1,
+          "TYPE": "BOOL"
+        },
+        "CONFIG_PENDING": {
+          "FLAGS": 9,
+          "ID": "CONFIG_PENDING",
+          "OPERATIONS": 5,
+          "TAB_ORDER": 2,
+          "TYPE": "BOOL"
+        },
+        "LOWBAT": {
+          "FLAGS": 9,
+          "ID": "LOWBAT",
+          "OPERATIONS": 5,
+          "TAB_ORDER": 3,
+          "TYPE": "BOOL"
+        },
+        "AES_KEY": {
+          "FLAGS": 0,
+          "ID": "AES_KEY",
+          "MIN": 0,
+          "MAX": 127,
+          "OPERATIONS": 1,
+          "TAB_ORDER": 4,
+          "TYPE": "INTEGER"
+        },
+        "RSSI_DEVICE": {
+          "FLAGS": 1,
+          "ID": "RSSI_DEVICE",
+          "OPERATIONS": 5,
+          "TAB_ORDER": 5,
+          "TYPE": "INTEGER"
+        },
+        "RSSI_PEER": {
+          "FLAGS": 1,
+          "ID": "RSSI_PEER",
+          "OPERATIONS": 5,
+          "TAB_ORDER": 6,
+          "TYPE": "INTEGER"
+        }
+      }
+    },
+    {
+      "name": "%ADDRESS%:1",
+      "type": "MASTER",
+      "value": {
+        "AES_ACTIVE": {
+          "FLAGS": 3,
+          "ID": "AES_ACTIVE",
+          "MIN": "",
+          "MAX": "",
+          "OPERATIONS": 3,
+          "TAB_ORDER": 2,
+          "TYPE": "BOOL"
+        }
+      }
+    },
+    {
+      "name": "%ADDRESS%:1",
+      "type": "VALUES",
+      "value": {
+        "INSTALL_TEST": {
+          "FLAGS": 3,
+          "ID": "INSTALL_TEST",
+          "MIN": "",
+          "MAX": "",
+          "OPERATIONS": 2,
+          "TAB_ORDER": 2,
+          "TYPE": "ACTION"
+        },
+        "MOTION": {
+          "FLAGS": 3,
+          "ID": "MOTION",
+          "MIN": 0,
+          "MAX": 1,
+          "OPERATIONS": 5,
+          "TAB_ORDER": 2,
+          "TYPE": "INTEGER"
+        }
+      }
+    }
+  ],
+  "paramsets": [
+    {
+      "name": "%ADDRESS%:0",
+      "type": "MASTER",
+      "value": {}
+    },
+    {
+      "name": "%ADDRESS%:0",
+      "type": "VALUES",
+      "value": {
+        "UNREACH": false,
+        "STICKY_UNREACH": false,
+        "CONFIG_PENDING": false,
+        "LOWBAT": false
+      }
+    },
+    {
+      "name": "%ADDRESS%:1",
+      "type": "MASTER",
+      "value": {
+        "AES_ACTIVE": true
+      }
+    },
+    {
+      "name": "%ADDRESS%:1",
+      "type": "VALUES",
+      "value": {
+        "MOTION": 0
+      }
+    }
+  ]
+}
