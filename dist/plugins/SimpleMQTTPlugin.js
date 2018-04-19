@@ -17,12 +17,34 @@ var SimpleMQTTPlugin = /** @class */ (function () {
         this.mqttServer = p.pluginParams.mqttServer;
         this.mqttUserName = p.pluginParams.mqttUserName;
         this.mqttPassword = p.pluginParams.mqttPassword;
-        this.mqttOnTopic = p.pluginParams.mqttOnTopic;
-        if (p.pluginParams.mqttOffTopic) {
-            this.mqttOffTopic = p.pluginParams.mqttOffTopic;
+        this.mqttPublishOnTopic = p.pluginParams.mqttOnTopic;
+        this.mqttPublishOffTopic = p.pluginParams.mqttOffTopic;
+        if (p.pluginParams.mqttPublishOnTopic) {
+            this.mqttPublishOnTopic = p.pluginParams.mqttPublishOnTopic;
+        }
+        if (p.pluginParams.mqttPublishOffTopic) {
+            this.mqttPublishOffTopic = p.pluginParams.mqttPublishOffTopic;
         }
         else {
-            this.mqttOffTopic = p.pluginParams.mqttOnTopic;
+            this.mqttPublishOffTopic = this.mqttPublishOnTopic;
+        }
+        if (p.pluginParams.mqttSubscribeOnTopic) {
+            this.mqttSubscribeOnTopic = p.pluginParams.mqttSubscribeOnTopic;
+        }
+        else {
+            this.mqttSubscribeOnTopic = this.mqttPublishOnTopic;
+        }
+        if (p.pluginParams.mqttSubscribeOffTopic) {
+            this.mqttSubscribeOffTopic = p.pluginParams.mqttSubscribeOffTopic;
+        }
+        else {
+            this.mqttSubscribeOffTopic = this.mqttSubscribeOnTopic;
+        }
+        if (p.pluginParams.mqttMessageMode) {
+            this.mqttMessageMode = p.pluginParams.mqttMessageMode;
+        }
+        else {
+            this.mqttMessageMode = "value";
         }
         var device = new HMLCSW1_1.HMLCSW1(p.deviceName);
         device.events.on('onTurnOn', this.onTurnOn.bind(this));
@@ -36,12 +58,12 @@ var SimpleMQTTPlugin = /** @class */ (function () {
     SimpleMQTTPlugin.prototype.onTurnOn = function (device) {
         logger.debug('onTurnOn()');
         logger.info('Device %s turned on.', device.deviceName);
-        this.mqttPublish(this.mqttOnTopic, '1');
+        this.mqttPublish(this.mqttPublishOnTopic, '1');
     };
     SimpleMQTTPlugin.prototype.onTurnOff = function (device) {
         logger.debug('onTurnOff()');
         logger.info('Device %s turned off.', device.deviceName);
-        this.mqttPublish(this.mqttOffTopic, '0');
+        this.mqttPublish(this.mqttPublishOffTopic, '0');
     };
     SimpleMQTTPlugin.prototype.mqttConnect = function () {
         if (this.mqttUserName) {
@@ -57,9 +79,9 @@ var SimpleMQTTPlugin = /** @class */ (function () {
         this.mqttConnection.on('connect', function () {
             logger.info('MQTT connected');
             that.mqttAvailable = true;
-            that.mqttSubscribe(that.mqttOnTopic);
-            if (that.mqttOnTopic !== that.mqttOffTopic) {
-                that.mqttSubscribe(that.mqttOffTopic);
+            that.mqttSubscribe(that.mqttSubscribeOnTopic);
+            if (that.mqttSubscribeOnTopic !== that.mqttSubscribeOffTopic) {
+                that.mqttSubscribe(that.mqttSubscribeOffTopic);
             }
         });
         this.mqttConnection.on('message', function (topic, message) {
@@ -74,12 +96,13 @@ var SimpleMQTTPlugin = /** @class */ (function () {
     };
     SimpleMQTTPlugin.prototype.mqttSubscribe = function (mqttTopic) {
         if (this.mqttAvailable) {
+            logger.info('"subscribing: "' + mqttTopic + '"');
             this.mqttConnection.subscribe(mqttTopic, null, function (err) {
                 if (err) {
-                    logger.error(err, '" subscribe: "' + mqttTopic + '"');
+                    logger.error(err, '" subscribing: "' + mqttTopic + '"');
                 }
                 else {
-                    logger.info('"subscribe: "' + mqttTopic + '"');
+                    logger.info('"subscribed: "' + mqttTopic + '"');
                 }
             });
         }
@@ -88,12 +111,22 @@ var SimpleMQTTPlugin = /** @class */ (function () {
         logger.info("subscribed mqtt message received:", topic, message.toString());
         var device = that.devices[0];
         var val;
-        var messageString = message.toString().toLowerCase();
-        if (messageString === 'true' || messageString === '1') {
-            val = 1;
+        if (that.mqttMessageMode == "value") {
+            var messageString = message.toString().toLowerCase();
+            if (messageString === 'true' || messageString === '1') {
+                val = 1;
+            }
+            else {
+                val = 0;
+            }
         }
         else {
-            val = 0;
+            if (topic === that.mqttSubscribeOnTopic) {
+                val = 1;
+            }
+            else {
+                val = 0;
+            }
         }
         if (val !== device.state1) {
             logger.info('Status of %s changed to %s.', device.deviceName, message);
