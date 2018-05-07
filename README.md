@@ -45,6 +45,75 @@ Currently it is possible to simulate switches (HM-LC-Sw1-FM) and remote controls
 
 This sample config exposes two switches to homee: HTTPSwitch and CMDSwitch. The former calls a http url when switched on or off. The latter one runs a cmd command when switched on or off. It also has a build in statusCmd that checks if the status has changed (outside of homee) and keeps it up-to-date.
 
+## Plugins
+
+### 1. SimpleHTTPPlugin
+
+This plugin exposes a single switch to homee. When switched the given http url will be called.
+
+```
+{
+        "deviceName": "HTTPSwitch",
+        "type": "SimpleHTTPPlugin",
+        "pluginParams": {
+                "onUrl": "http://www.google.de/on",
+                "offUrl": "http://www.google.de/off"
+        }
+}
+```
+
+### 2. SimpleCMDPlugin
+
+This plugin exposes a single switch to homee. When switched the given cmd statement will be executed. It also provides a status cmd statement that will be called every seconds (defined in `checkInterval`). Depending on that result, the switch will be changed. This allows reflecting external changes in homee.
+
+```
+{
+        "deviceName": "CMDSwitch",
+        "type": "SimpleCMDPlugin",
+        "pluginParams": {
+                "onCmd": "touch /tmp/file",
+                "offCmd": "rm /tmp/file",
+                "statusCmd": "ls /tmp/file >> /dev/null; echo $?",
+                "checkInterval": 2000
+        }
+}
+```
+
+### 3. FritzBoxPlugin (FritzBox Guest Wifi)
+
+This plugin exposes a switch to homee that lets you de/activate your guest wifi using an AVM FritzBox.
+
+```
+{
+        "deviceName": "FritzGuestWifi",
+        "type": "FritzBoxPlugin",
+        "pluginParams": {
+                "ipAddress": "http://fritz.box/",
+                "user": "username",
+                "password": "password"
+        }
+}
+```
+
+### 4. SimpleMQTTPlugin
+
+todo
+
+### 5. VorwerkKoboldPlugin (Vorwerk Kobold VR200)
+
+Exposes a switch to homee that lets you start/stop your Vorwerk Kobold VR200.
+
+```
+{
+        "deviceName": "VorwerkKobold",
+        "type": "VorwerkKoboldPlugin",
+        "pluginParams": {
+                "email": "your@email.com",
+                "password": "password"
+        }
+}
+```
+
 ## Troubleshooting
 
 Feel free to open an issue if you experience any issues. However please start homeeUp using `LOG=debug homeeup` to generate debug output and attach it to your issue.
