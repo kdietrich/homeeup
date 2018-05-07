@@ -15,6 +15,8 @@ Currently it is possible to simulate switches (HM-LC-Sw1-FM) and remote controls
 3. Start it up: `LOG=info homeeup`
 4. Add a new Homematic CCU to homee.
 
+Alternatively you could use [**homeean**](https://himpler.com/homeean) to install homeeUp on a Raspberry Pi with a plain vanilla Raspbian installation. homeean is a web based buildtool, which generates an individual buildscript (Bash-Script) for user selected Smart Home Tools to be installed on a Raspberry Pi running on Raspbian. homeeUp is provided as an homeean install option.
+
 ## Sample config.js
 
 ```
