@@ -55,6 +55,7 @@ var HMSECMDIR2 = /** @class */ (function () {
     };
     HMSECMDIR2.prototype.stateChanged = function (id, value) {
         logger.debug('stateChanged(%s,%s)', id, value);
+        this.state1 = value;
         var channel = this.deviceName + ':' + id;
         this.server.broadcastEvent(channel, 'MOTION', value);
         console.log('Sending broadcast MOTION=%s to %s', value, channel);

@@ -67,6 +67,7 @@ export class HMSECMDIR2 {
 
     stateChanged(id, value) {
         logger.debug('stateChanged(%s,%s)', id, value);
+        this.state1 = value;
         let channel = this.deviceName+':'+id;
         this.server.broadcastEvent(channel, 'MOTION', value);
         console.log('Sending broadcast MOTION=%s to %s', value, channel);

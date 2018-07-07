@@ -55,6 +55,7 @@ var HMSECSC2 = /** @class */ (function () {
     };
     HMSECSC2.prototype.stateChanged = function (id, value) {
         logger.debug('stateChanged(%s,%s)', id, value);
+        this.state1 = value;
         var channel = this.deviceName + ':' + id;
         this.server.broadcastEvent(channel, 'STATE', value);
         console.log('Sending broadcast STATE=%s to %s', value, channel);
