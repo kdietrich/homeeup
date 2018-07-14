@@ -20,7 +20,7 @@ class HomeeUp {
     config;
 
     start() {
-        logger.info('Launching HomeeUp v0.1.2');
+        logger.info('Launching HomeeUp v0.1.3');
         logger.info('2018 by kdietrich');
         logger.info('running on node %s', process.version);
         logger.info('======================================');

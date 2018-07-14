@@ -6,7 +6,7 @@
 
 homeeUp allows you to use virtual devices in the smart home hub homee by exposing them via a simulated Homematic CCU (don't worry - you don't need a physical CCU). homeeUp is based on plugins so feel free to add your own ones by providing pull requests.
 
-Currently it is possible to simulate switches (HM-LC-Sw1-FM) and remote controls (HM-RC-4-2).
+Currently it is possible to simulate switches (HM-LC-Sw1-FM), motion sensors (HM-Sec-MDIR-2), door contacts (HM-Sec-SC-2) and remote controls (HM-RC-4-2).
 
 ## How-to
 
@@ -103,7 +103,7 @@ todo
 
 ### 5. VorwerkKoboldPlugin (Vorwerk Kobold VR200)
 
-Exposes a switch to homee that lets you start/stop your Vorwerk Kobold VR200.
+Exposes a switch to homee that lets you start/stop your Vorwerk Kobold VR200. It also exposes a door contact that shows if the robot is in the dock.
 
 ```
 {
@@ -121,6 +121,11 @@ Exposes a switch to homee that lets you start/stop your Vorwerk Kobold VR200.
 Feel free to open an issue if you experience any issues. However please start homeeUp using `LOG=debug homeeup` to generate debug output and attach it to your issue.
 
 ## Changes
+
+#### v0.1.3 (2018-07-14)
+- New: Vorwerk VR200 plugin
+- Motion sensor and door contacts supported
+- Changes to plugin architecture
 
 #### v0.1.2 (2018-03-23)
 - New: MQTT plugin
