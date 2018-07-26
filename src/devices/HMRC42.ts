@@ -11,14 +11,16 @@ export class HMRC42 {
     events = new EventEmitter();
     template;
     plugin;
+    server;
 
     constructor(deviceName: String) {
         this.deviceName = deviceName;
     }
 
-    init(plugin) {
-        logger.debug('init(%s)', JSON.stringify(plugin));
+    init(pluginParams, plugin, server) {
+        logger.debug('init(%s,%s)', JSON.stringify(pluginParams), JSON.stringify(server));
         this.plugin = plugin;
+        this.server = server;
 
         var jsonPath = path.join(path.dirname(fs.realpathSync(__filename)), '../../src/devices/');
         var file = fs.readFileSync(jsonPath + this.templatePath, 'utf8');

@@ -11,9 +11,10 @@ var HMRC42 = /** @class */ (function () {
         this.events = new EventEmitter();
         this.deviceName = deviceName;
     }
-    HMRC42.prototype.init = function (plugin) {
-        logger.debug('init(%s)', JSON.stringify(plugin));
+    HMRC42.prototype.init = function (pluginParams, plugin, server) {
+        logger.debug('init(%s,%s)', JSON.stringify(pluginParams), JSON.stringify(server));
         this.plugin = plugin;
+        this.server = server;
         var jsonPath = path.join(path.dirname(fs.realpathSync(__filename)), '../../src/devices/');
         var file = fs.readFileSync(jsonPath + this.templatePath, 'utf8');
         file = file.replace(/%ADDRESS%/g, this.deviceName);
