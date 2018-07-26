@@ -1,0 +1,401 @@
+{
+  "channels": [
+    {
+      "ADDRESS": "%ADDRESS%",
+      "CHILDREN": [
+        "%ADDRESS%:0",
+        "%ADDRESS%:1"
+      ],
+      "FIRMWARE": "1.0",
+      "FLAGS": 1,
+      "INTERFACE": "HOMEEUP",
+      "PARAMSETS": [],
+      "RF_ADDRESS": 0,
+      "ROAMING": 0,
+      "RX_MODE": 1,
+      "TYPE": "HM-LC-Bl1-FM",
+      "UPDATABLE": 1,
+      "VERSION": 41
+    },
+    {
+      "TYPE": "MAINTENANCE",
+      "ADDRESS": "%ADDRESS%:0",
+      "RF_ADDRESS": 0,
+      "PARENT": "%ADDRESS%",
+      "PARENT_TYPE": "HM-LC-Bl1-FM",
+      "INDEX": 0,
+      "UPDATABLE": true,
+      "FLAGS": 3,
+      "DIRECTION": 2,
+      "VERSION": 41,
+      "PARAMSETS": [
+        "MASTER",
+        "VALUES"
+      ],
+      "AES_ACTIVE": 0
+    },
+    {
+      "TYPE": "BLIND",
+      "ADDRESS": "%ADDRESS%:1",
+      "RF_ADDRESS": 0,
+      "PARENT": "%ADDRESS%",
+      "PARENT_TYPE": "HM-LC-Bl1-FM",
+      "INDEX": 1,
+      "UPDATABLE": true,
+      "FLAGS": 1,
+      "DIRECTION": 2,
+      "VERSION": 41,
+      "PARAMSETS": [
+        "MASTER",
+        "VALUES",
+        "LINK"
+      ],
+      "AES_ACTIVE": 0
+    }
+  ],
+  "paramsetDescriptions": [
+    {
+      "name": "%ADDRESS%:0",
+      "type": "MASTER",
+      "value": {}
+    },
+    {
+      "name": "%ADDRESS%:0",
+      "type": "VALUES",
+      "value": {
+        "AES_KEY": {
+          "DEFAULT": 0,
+          "FLAGS": 0,
+          "ID": "AES_KEY",
+          "MIN": 0,
+          "MAX": 127,
+          "OPERATIONS": 1,
+          "TAB_ORDER": 7,
+          "TYPE": "INTEGER",
+          "UNIT": ""
+        },
+        "CONFIG_PENDING": {
+          "DEFAULT": 0,
+          "FLAGS": 9,
+          "ID": "CONFIG_PENDING",
+          "MAX": 1,
+          "MIN": 0,
+          "OPERATIONS": 5,
+          "TAB_ORDER": 2,
+          "TYPE": "BOOL",
+          "UNIT": ""
+        },
+        "DUTYCYCLE": {
+          "DEFAULT": 0,
+          "FLAGS": 9,
+          "ID": "DUTYCYCLE",
+          "MAX": 1,
+          "MIN": 0,
+          "OPERATIONS": 5,
+          "TAB_ORDER": 4,
+          "TYPE": "BOOL",
+          "UNIT": ""
+        },
+        "RSSI_DEVICE": {
+          "DEFAULT": 0,
+          "FLAGS": 1,
+          "ID": "RSSI_DEVICE",
+          "MAX": 2147483647,
+          "MIN": -2147483647,
+          "OPERATIONS": 5,
+          "TAB_ORDER": 5,
+          "TYPE": "INTEGER",
+          "UNIT": ""
+        },
+        "RSSI_PEER": {
+          "DEFAULT": 0,
+          "FLAGS": 1,
+          "ID": "RSSI_PEER",
+          "MAX": 2147483647,
+          "MIN": -2147483647,
+          "OPERATIONS": 5,
+          "TAB_ORDER": 6,
+          "TYPE": "INTEGER",
+          "UNIT": ""
+        },
+        "STICKY_UNREACH": {
+          "DEFAULT": 0,
+          "FLAGS": 24,
+          "ID": "STICKY_UNREACH",
+          "MAX": 1,
+          "MIN": 0,
+          "OPERATIONS": 7,
+          "TAB_ORDER": 1,
+          "TYPE": "BOOL",
+          "UNIT": ""
+        },
+        "UNREACH": {
+          "DEFAULT": 0,
+          "FLAGS": 9,
+          "ID": "UNREACH",
+          "MAX": 1,
+          "MIN": 0,
+          "OPERATIONS": 5,
+          "TAB_ORDER": 0,
+          "TYPE": "BOOL",
+          "UNIT": ""
+        }
+      }
+    },
+    {
+      "name": "%ADDRESS%:1",
+      "type": "MASTER",
+      "value": {
+        "AES_ACTIVE": {
+          "DEFAULT": 0,
+          "FLAGS": 3,
+          "ID": "AES_ACTIVE",
+          "MIN": 0,
+          "MAX": 1,
+          "OPERATIONS": 3,
+          "TAB_ORDER": 1,
+          "TYPE": "BOOL",
+          "UNIT": ""
+        },
+        "REFERENCE_RUNNING_TIME_TOP_BOTTOM": {
+            "DEFAULT": {
+                "explicitDouble": 50
+            },
+            "FLAGS": 1,
+            "MIN": {
+                "explicitDouble": 0.1
+            },
+            "MAX": {
+                "explicitDouble": 6000.0
+            },
+            "OPERATIONS": 3,
+            "TAB_ORDER": 1,
+            "TYPE": "FLOAT",
+            "UNIT": "s"
+        },
+        "REFERENCE_RUNNING_TIME_BOTTOM_TOP": {
+            "DEFAULT": {
+                "explicitDouble": 50
+            },
+            "FLAGS": 1,
+            "MIN": {
+                "explicitDouble": 0.1
+            },
+            "MAX": {
+                "explicitDouble": 6000.0
+            },
+            "OPERATIONS": 3,
+            "TAB_ORDER": 2,
+            "TYPE": "FLOAT",
+            "UNIT": "s"
+        },
+        "CHANGE_OVER_DELAY": {
+            "DEFAULT": {
+                "explicitDouble": 0.5
+            },
+            "FLAGS": 1,
+            "MIN": {
+                "explicitDouble": 0.5
+            },
+            "MAX": {
+                "explicitDouble": 25.5
+            },
+            "OPERATIONS": 3,
+            "TAB_ORDER": 3,
+            "TYPE": "FLOAT",
+            "UNIT": "s"
+        },
+        "REFERENCE_RUN_COUNTER": {
+            "DEFAULT": 0,
+            "FLAGS": 1,
+            "MIN": "0",
+            "MAX": "255",
+            "OPERATIONS": 3,
+            "TAB_ORDER": 4,
+            "TYPE": "INTEGER",
+            "UNIT": ""
+        },
+        "TRANSMIT_TRY_MAX": {
+            "DEFAULT": 6,
+            "FLAGS": 1,
+            "MIN": "0",
+            "MAX": "10",
+            "OPERATIONS": 3,
+            "TAB_ORDER": 5,
+            "TYPE": "INTEGER",
+            "UNIT": ""
+        },
+        "STATUSINFO_MINDELAY": {
+            "DEFAULT": {
+                "explicitDouble": 2.0
+            },
+            "FLAGS": 1,
+            "MIN": {
+                "explicitDouble": 0.5
+            },
+            "MAX": {
+                "explicitDouble": 15.5
+            },
+            "OPERATIONS": 3,
+            "TAB_ORDER": 6,
+            "TYPE": "FLOAT",
+            "UNIT": "s"
+        },
+        "STATUSINFO_RANDOM": {
+            "DEFAULT": {
+                "explicitDouble": 1.0
+            },
+            "FLAGS": 1,
+            "MIN": {
+                "explicitDouble": 0.0
+            },
+            "MAX": {
+                "explicitDouble": 7.0
+            },
+            "OPERATIONS": 3,
+            "TAB_ORDER": 7,
+            "TYPE": "FLOAT",
+            "UNIT": "s"
+        }
+      }
+    },
+    {
+      "name": "%ADDRESS%:1",
+      "type": "VALUES",
+      "value": {
+        "LEVEL": {
+          "CONTROL": "BLIND.LEVEL",
+          "DEFAULT": {
+            "explicitDouble": 0.0
+          },
+          "FLAGS": 1,
+          "ID": "LEVEL",
+          "MIN": {
+            "explicitDouble": 0.0
+          },
+          "MAX": {
+            "explicitDouble": 100.0
+          },
+          "OPERATIONS": 7,
+          "TAB_ORDER": 1,
+          "TYPE": "FLOAT",
+          "UNIT": "%"
+        },
+        "STOP": {
+          "FLAGS": 3,
+          "ID": "STOP",
+          "OPERATIONS": 7,
+          "TAB_ORDER": 2,
+          "TYPE": "INTEGER",
+          "CONTROL": "BLIND.STOP",
+          "UNIT": ""
+        },
+        "INHIBIT": {
+          "CONTROL": "NONE",
+          "DEFAULT": 0,
+          "FLAGS": 1,
+          "ID": "INHIBIT",
+          "MAX": 1,
+          "MIN": 0,
+          "OPERATIONS": 7,
+          "TAB_ORDER": 3,
+          "TYPE": "BOOL",
+          "UNIT": ""
+        },
+        "WORKING": {
+          "DEFAULT": 0,
+          "FLAGS": 3,
+          "ID": "WORKING",
+          "MAX": 1,
+          "MIN": 0,
+          "OPERATIONS": 5,
+          "TAB_ORDER": 4,
+          "TYPE": "BOOL",
+          "UNIT": ""
+        },
+        "WORKING_SLATS": {
+          "DEFAULT": 0,
+          "FLAGS": 3,
+          "ID": "WORKING_SLATS",
+          "MAX": 1,
+          "MIN": 0,
+          "OPERATIONS": 5,
+          "TAB_ORDER": 4,
+          "TYPE": "BOOL",
+          "UNIT": ""
+        },
+        "DIRECTION": {
+          "DEFAULT": 0,
+          "FLAGS": 1,
+          "ID": "DIRECTION",
+          "OPERATIONS": 5,
+          "TAB_ORDER": 5,
+          "TYPE": "ENUM",
+          "UNIT": "",
+          "VALUE_LIST": [
+            "NONE",
+            "UP",
+            "DOWN",
+            "UNDEFINED"
+          ]
+        },
+        "INSTALL_TEST": {
+          "DEFAULT": 0,
+          "FLAGS": 3,
+          "ID": "INSTALL_TEST",
+          "MIN": 0,
+          "MAX": 1,
+          "OPERATIONS": 2,
+          "TAB_ORDER": 3,
+          "TYPE": "ACTION",
+          "UNIT": ""
+        }
+      }
+    }
+  ],
+  "paramsets": [
+    {
+      "name": "%ADDRESS%:0",
+      "type": "MASTER",
+      "value": {}
+    },
+    {
+      "name": "%ADDRESS%:0",
+      "type": "VALUES",
+      "value": {
+        "AES_KEY": false,
+        "CONFIG_PENDING": false,
+        "DUTYCYCLE": false,
+        "RSSI_DEVICE": 0,
+        "RSSI_PEER": 0,
+        "STICKY_UNREACH": false,
+        "UNREACH": false
+      }
+    },
+    {
+      "name": "%ADDRESS%:1",
+      "type": "MASTER",
+      "value": {
+        "AES_ACTIVE": false,
+        "REFERENCE_RUNNING_TIME_TOP_BOTTOM": 50.0,
+        "REFERENCE_RUNNING_TIME_BOTTOM_TOP": 50.0,
+        "CHANGE_OVER_DELAY": 0.5,
+        "REFERENCE_RUN_COUNTER": 0,
+        "TRANSMIT_TRY_MAX": 6,
+        "STATUSINFO_MINDELAY": 2.0,
+        "STATUSINFO_RANDOM": 1.0
+      }
+    },
+    {
+      "name": "%ADDRESS%:1",
+      "type": "VALUES",
+      "value": {
+        "LEVEL": %LEVEL1%,
+        "INHIBIT": false,
+        "WORKING": false,
+        "DIRECTION": 0,
+        "STOP": %STOP1%
+      }
+    }
+  ]
+}
