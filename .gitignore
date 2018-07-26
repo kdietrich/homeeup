@@ -2,3 +2,4 @@ test.js
 .node-persist/
 node_modules/
 typings/
+src/devices/template.json
