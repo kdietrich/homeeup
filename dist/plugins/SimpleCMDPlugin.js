@@ -21,14 +21,16 @@ var SimpleCMDPlugin = /** @class */ (function () {
         device.events.on('onTurnOn', this.onTurnOn.bind(this));
         device.events.on('onTurnOff', this.onTurnOff.bind(this));
         this.devices.push(device);
-        var that = this;
-        setInterval(function () {
-            if (!that.checkIntervalPaused)
-                that._checkStatus(device, false);
-            else
-                logger.info('Checking status is paused.', that.name);
-        }, that.checkInterval);
-        that._checkStatus(device, true);
+        if (this.statusCmd) {
+            var that = this;
+            setInterval(function () {
+                if (!that.checkIntervalPaused)
+                    that._checkStatus(device, false);
+                else
+                    logger.info('Checking status is paused.', that.name);
+            }, that.checkInterval);
+            that._checkStatus(device, true);
+        }
         logger.info('Plugin %s initialized.', this.name);
         return this.devices;
     };
