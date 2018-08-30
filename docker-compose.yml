@@ -4,5 +4,8 @@ services:
     build: .
     ports:
       - "2001:2001"
+    network_mode: host
     volumes:
       - ~/.homeeup:/root/.homeeup
+    environment:
+      - LOG=info
