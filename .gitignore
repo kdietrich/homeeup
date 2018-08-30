@@ -3,3 +3,4 @@ test.js
 node_modules/
 typings/
 src/devices/template.json
+.idea
