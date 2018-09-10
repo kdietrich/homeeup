@@ -23,7 +23,7 @@ export class HMRC42 {
         this.server = server;
 
         var jsonPath = path.join(path.dirname(fs.realpathSync(__filename)), '../../src/devices/');
-        var file = fs.readFileSync(jsonPath + this.templatePath, 'utf8');
+        var file = fs.readFileSync(jsonPath + this.templatePath, 'latin1');
         file = file.replace(/%ADDRESS%/g, this.deviceName);
         this.template = JSON.parse(file);
         logger.info('Device %s of plugin %s initialized.', this.deviceName, this.plugin.name);

@@ -1,7 +1,7 @@
 "use strict";
 exports.__esModule = true;
 var Logger = require('logplease');
-var xmlrpc = require('homematic-xmlrpc');
+var xmlrpc = require('xmlrpc');
 var logger = Logger.create('XMLRPCServer');
 var storage = require('node-persist');
 var os = require('os');
@@ -16,7 +16,7 @@ var XMLRPCServer = /** @class */ (function () {
         logger.debug('init(%s)', devices);
         logger.info('Initializing XMLRPCServer.');
         this.devices = devices;
-        this.server = xmlrpc.createServer({ host: this.host, port: this.port });
+        this.server = xmlrpc.createServer({ host: this.host, port: this.port, encoding: 'ISO-8859-1' });
         this.server.on('NotFound', this._onNotFound.bind(this));
         this.server.on('system.listMethods', this._onListMethods.bind(this));
         this.server.on('init', this._onInit.bind(this));
@@ -75,7 +75,7 @@ var XMLRPCServer = /** @class */ (function () {
                 host = d[0];
                 port = d[1];
             }
-            var client = xmlrpc.createClient({ host: host, port: port, path: path });
+            var client = xmlrpc.createClient({ host: host, port: port, path: path, encoding: 'ISO-8859-1' });
             this.consumers.push({ 'host': host, 'port': port, 'id': params[1], 'client': client });
             logger.info('Initiated new consumer: host %s port %s path %s id %s', host, port, path, params[1]);
             storage.initSync({ dir: os.homedir() + '/.homeeup/persist/' });
@@ -219,7 +219,7 @@ var XMLRPCServer = /** @class */ (function () {
         }
         for (var i = 0; i < consumers.length; i++) {
             var c = consumers[i];
-            var client = xmlrpc.createClient({ host: c.host, port: c.port, path: c.path });
+            var client = xmlrpc.createClient({ host: c.host, port: c.port, path: c.path, encoding: 'ISO-8859-1' });
             that.consumers.push({ 'host': c.host, 'port': c.port, 'id': c.id, 'client': client });
             logger.info('Initiated new consumer from storage: host %s port %s path %s id %s', c.host, c.port, c.path, c.id);
         }

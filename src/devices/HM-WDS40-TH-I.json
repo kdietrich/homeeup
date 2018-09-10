@@ -133,7 +133,7 @@
           "OPERATIONS": 5,
           "TAB_ORDER": 1,
           "TYPE": "INTEGER",
-          "UNIT": "C"
+          "UNIT": "°C"
         },
         "HUMIDITY": {
           "FLAGS": 3,

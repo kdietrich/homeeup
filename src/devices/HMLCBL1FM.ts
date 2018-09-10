@@ -28,7 +28,7 @@ export class HMLCBL1FM {
         this.server = server;
 
         var jsonPath = path.join(path.dirname(fs.realpathSync(__filename)), '../../src/devices/');
-        var file = fs.readFileSync(jsonPath + this.templatePath, 'utf8');
+        var file = fs.readFileSync(jsonPath + this.templatePath, 'latin1');
         file = file.replace(/%ADDRESS%/g, this.deviceName);
         file = file.replace(/%LEVEL1%/g, this.level1);
         file = file.replace(/%STOP1%/g, this.stop1);

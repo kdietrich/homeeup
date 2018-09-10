@@ -28,7 +28,7 @@ export class HMWDS40THI {
         this.server = server;
 
         var jsonPath = path.join(path.dirname(fs.realpathSync(__filename)), '../../src/devices/');
-        var file = fs.readFileSync(jsonPath + this.templatePath, 'utf8');
+        var file = fs.readFileSync(jsonPath + this.templatePath, 'latin1');
         file = file.replace(/%ADDRESS%/g, this.deviceName);
         file = file.replace(/"%TEMPERATURE1%"/g, this.temperature1);
         file = file.replace(/"%HUMIDITY1%"/g, this.humidity1);

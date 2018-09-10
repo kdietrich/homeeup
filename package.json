@@ -6,7 +6,7 @@
   "dependencies": {
     "child_process": "^1.0.2",
     "fritzapi": "^0.10.3",
-    "homematic-xmlrpc": "^1.0.2",
+    "xmlrpc": "git+https://github.com/kdietrich/node-xmlrpc.git#3a74385bdbe889bfcfc698d0a8983aa1ce8c0bc3",
     "logplease": "^1.2.14",
     "mqtt": "^2.16.0",
     "node-kobold": "^0.1.2",

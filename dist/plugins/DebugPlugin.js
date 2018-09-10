@@ -25,12 +25,7 @@ var DebugPlugin = /** @class */ (function () {
         this.devices.push(device);
         this.devices.push(new HMRC42_1.HMRC42(p.deviceName + 'Remote'));
         this.devices.push(new HMLCBL1FM_1.HMLCBL1FM(p.deviceName + 'Blinds'));
-        var dd = new HMWDS40THI_1.HMWDS40THI(p.deviceName + 'TempHumid');
-        this.devices.push(dd);
-        setTimeout(function () {
-            dd.temperatureChanged(1, 40);
-            dd.humidityChanged(1, 30);
-        }, 4000);
+        this.devices.push(new HMWDS40THI_1.HMWDS40THI(p.deviceName + 'TempHumid'));
         logger.info('Plugin %s initialized.', this.name);
         return this.devices;
     };

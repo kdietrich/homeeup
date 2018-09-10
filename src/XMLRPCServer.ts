@@ -1,5 +1,5 @@
 const Logger = require('logplease');
-const xmlrpc = require('homematic-xmlrpc');
+const xmlrpc = require('xmlrpc');
 const logger = Logger.create('XMLRPCServer');
 const storage = require('node-persist');
 const os = require('os');
@@ -12,7 +12,7 @@ export class XMLRPCServer {
     server;
     devices;
 
-    constructor(host: String, port: number) {
+    constructor(host: String, port: number) {
         logger.debug('constructor(%s,%s)', host, port);
         this.host = host;
         this.port = port;
@@ -22,7 +22,7 @@ export class XMLRPCServer {
         logger.debug('init(%s)', devices);
         logger.info('Initializing XMLRPCServer.');
         this.devices = devices;
-        this.server = xmlrpc.createServer({ host: this.host, port: this.port });
+        this.server = xmlrpc.createServer({ host: this.host, port: this.port, encoding: 'ISO-8859-1' });
 
         this.server.on('NotFound', this._onNotFound.bind(this));
         this.server.on('system.listMethods', this._onListMethods.bind(this));
@@ -90,7 +90,7 @@ export class XMLRPCServer {
               host = d[0];
               port = d[1];
             }
-            var client = xmlrpc.createClient({host: host, port: port, path: path});
+            var client = xmlrpc.createClient({host: host, port: port, path: path, encoding: 'ISO-8859-1'});
             this.consumers.push({'host': host, 'port': port, 'id': params[1], 'client': client});
             logger.info('Initiated new consumer: host %s port %s path %s id %s', host, port, path, params[1]);
 
@@ -247,7 +247,7 @@ export class XMLRPCServer {
         for(let i=0; i<consumers.length; i++) {
             let c = consumers[i];
 
-            let client = xmlrpc.createClient({host: c.host, port: c.port, path: c.path});
+            let client = xmlrpc.createClient({host: c.host, port: c.port, path: c.path, encoding: 'ISO-8859-1'});
             that.consumers.push({'host': c.host, 'port': c.port, 'id': c.id, 'client': client});
             logger.info('Initiated new consumer from storage: host %s port %s path %s id %s', c.host, c.port, c.path, c.id);
         }
