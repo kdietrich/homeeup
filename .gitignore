@@ -4,3 +4,4 @@ node_modules/
 typings/
 src/devices/template.json
 package-log.json
+.idea

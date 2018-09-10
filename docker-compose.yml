@@ -1,0 +1,11 @@
+version: "3"
+services:
+  app:
+    build: .
+    ports:
+      - "2001:2001"
+    network_mode: host
+    volumes:
+      - ~/.homeeup:/root/.homeeup
+    environment:
+      - LOG=info
