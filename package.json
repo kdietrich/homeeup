@@ -1,12 +1,12 @@
 {
   "name": "homeeup",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Use virtual devices in homee. <3",
   "main": "dist/index.js",
   "dependencies": {
     "child_process": "^1.0.2",
     "fritzapi": "^0.10.3",
-    "xmlrpc": "git+https://github.com/kdietrich/node-xmlrpc.git#3a74385bdbe889bfcfc698d0a8983aa1ce8c0bc3",
+    "xmlrpc": "https://github.com/kdietrich/node-xmlrpc/tarball/3a74385bdbe889bfcfc698d0a8983aa1ce8c0bc3",
     "logplease": "^1.2.14",
     "mqtt": "^2.16.0",
     "node-kobold": "^0.1.2",

@@ -122,6 +122,16 @@ Feel free to open an issue if you experience any issues. However please start ho
 
 ## Changes
 
+#### v0.1.5 (2018-09-13)
+- Install bugfix
+
+#### v0.1.4 (2018-09-11)
+- SimpleCMDPlugin: statusCmd is optional
+- SimpleCMDPlugin: pauseCheckIntervalAfterSwitch
+- New: Debug plugin
+- Docker integration
+- Bugfixes
+
 #### v0.1.3 (2018-07-14)
 - New: Vorwerk VR200 plugin
 - Motion sensor and door contacts supported
