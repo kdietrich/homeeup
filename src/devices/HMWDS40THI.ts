@@ -12,8 +12,8 @@ export class HMWDS40THI {
     template;
     plugin;
     server;
-    temperature1 = 29;
-    humidity1 = 53;
+    temperature1 = 0;
+    humidity1 = 0;
 
     constructor(deviceName: String) {
         this.deviceName = deviceName;

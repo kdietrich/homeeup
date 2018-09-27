@@ -6,11 +6,12 @@
   "dependencies": {
     "child_process": "^1.0.2",
     "fritzapi": "^0.10.3",
-    "xmlrpc": "https://github.com/kdietrich/node-xmlrpc/tarball/3a74385bdbe889bfcfc698d0a8983aa1ce8c0bc3",
     "logplease": "^1.2.14",
+    "lumi-aqara": "^1.10.0",
     "mqtt": "^2.16.0",
     "node-kobold": "^0.1.2",
-    "node-persist": "^2.1.0"
+    "node-persist": "^2.1.0",
+    "xmlrpc": "https://github.com/kdietrich/node-xmlrpc/tarball/3a74385bdbe889bfcfc698d0a8983aa1ce8c0bc3"
   },
   "devDependencies": {
     "@types/node": "^9.4.7",

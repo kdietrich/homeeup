@@ -10,7 +10,8 @@ var FritzBoxPlugin_1 = require("./plugins/FritzBoxPlugin");
 var SimpleMQTTPlugin_1 = require("./plugins/SimpleMQTTPlugin");
 var VorwerkKoboldPlugin_1 = require("./plugins/VorwerkKoboldPlugin");
 var DebugPlugin_1 = require("./plugins/DebugPlugin");
-var pluginPresets = { SimpleHTTPPlugin: SimpleHTTPPlugin_1.SimpleHTTPPlugin, SimpleCMDPlugin: SimpleCMDPlugin_1.SimpleCMDPlugin, FritzBoxPlugin: FritzBoxPlugin_1.FritzBoxPlugin, SimpleMQTTPlugin: SimpleMQTTPlugin_1.SimpleMQTTPlugin, VorwerkKoboldPlugin: VorwerkKoboldPlugin_1.VorwerkKoboldPlugin, DebugPlugin: DebugPlugin_1.DebugPlugin };
+var AqaraPlugin_1 = require("./plugins/AqaraPlugin");
+var pluginPresets = { SimpleHTTPPlugin: SimpleHTTPPlugin_1.SimpleHTTPPlugin, SimpleCMDPlugin: SimpleCMDPlugin_1.SimpleCMDPlugin, FritzBoxPlugin: FritzBoxPlugin_1.FritzBoxPlugin, SimpleMQTTPlugin: SimpleMQTTPlugin_1.SimpleMQTTPlugin, VorwerkKoboldPlugin: VorwerkKoboldPlugin_1.VorwerkKoboldPlugin, DebugPlugin: DebugPlugin_1.DebugPlugin, AqaraPlugin: AqaraPlugin_1.AqaraPlugin };
 var HomeeUp = /** @class */ (function () {
     function HomeeUp() {
         this.hostPort = 2001;
