@@ -8,6 +8,7 @@ var HMSECMDIR2_1 = require("../devices/HMSECMDIR2");
 var HMRC42_1 = require("../devices/HMRC42");
 var HMLCBL1FM_1 = require("../devices/HMLCBL1FM");
 var HMWDS40THI_1 = require("../devices/HMWDS40THI");
+var HMCCTC_1 = require("../devices/HMCCTC");
 var DebugPlugin = /** @class */ (function () {
     function DebugPlugin() {
         this.name = 'DebugPlugin';
@@ -26,6 +27,7 @@ var DebugPlugin = /** @class */ (function () {
         this.devices.push(new HMRC42_1.HMRC42(p.deviceName + 'Remote'));
         this.devices.push(new HMLCBL1FM_1.HMLCBL1FM(p.deviceName + 'Blinds'));
         this.devices.push(new HMWDS40THI_1.HMWDS40THI(p.deviceName + 'TempHumid'));
+        this.devices.push(new HMCCTC_1.HMCCTC(p.deviceName + 'TempControl'));
         logger.info('Plugin %s initialized.', this.name);
         return this.devices;
     };

@@ -10,8 +10,9 @@ import { SimpleMQTTPlugin } from "./plugins/SimpleMQTTPlugin";
 import { VorwerkKoboldPlugin } from "./plugins/VorwerkKoboldPlugin";
 import { DebugPlugin } from "./plugins/DebugPlugin";
 import { AqaraPlugin } from "./plugins/AqaraPlugin";
+import { SimulatePlugin } from "./plugins/SimulatePlugin";
 
-const pluginPresets = { SimpleHTTPPlugin, SimpleCMDPlugin, FritzBoxPlugin, SimpleMQTTPlugin, VorwerkKoboldPlugin, DebugPlugin, AqaraPlugin };
+const pluginPresets = { SimpleHTTPPlugin, SimpleCMDPlugin, FritzBoxPlugin, SimpleMQTTPlugin, VorwerkKoboldPlugin, DebugPlugin, AqaraPlugin, SimulatePlugin };
 
 class HomeeUp {
 

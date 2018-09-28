@@ -1,19 +1,18 @@
 const Logger = require('logplease');
-const logger = Logger.create('HMWDS40THI');
+const logger = Logger.create('HMCCTC');
 var fs = require('fs');
 var path = require('path');
 const EventEmitter = require('events');
 
-export class HMWDS40THI {
+export class HMCCTC {
 
-    templatePath: String = 'HM-WDS40-TH-I.json';
+    templatePath: String = 'HM-CC-TC.json';
     deviceName: String;
     events = new EventEmitter();
     template;
     plugin;
     server;
-    temperature1 = null;
-    humidity1 = null;
+    setpoint1 = 0;
 
     constructor(deviceName: String) {
         this.deviceName = deviceName;
@@ -30,8 +29,7 @@ export class HMWDS40THI {
         var jsonPath = path.join(path.dirname(fs.realpathSync(__filename)), '../../src/devices/');
         var file = fs.readFileSync(jsonPath + this.templatePath, 'latin1');
         file = file.replace(/%ADDRESS%/g, this.deviceName);
-        file = file.replace(/"%TEMPERATURE1%"/g, this.temperature1);
-        file = file.replace(/"%HUMIDITY1%"/g, this.humidity1);
+        file = file.replace(/"%SETPOINT1%"/g, this.setpoint1);
         this.template = JSON.parse(file);
 
         logger.info('Device %s of plugin %s initialized.', this.deviceName, this.plugin.name);
@@ -64,23 +62,28 @@ export class HMWDS40THI {
     }
 
     putParamset(ps) {
-        //TODO
+        logger.debug('putParamset(%s)', ps);
+        let that = this;
+        for(let key in ps[2]) {
+            if(ps[2].hasOwnProperty(key)) {
+                if(key=='SETPOINT') {
+                    this.setpoint1 = ps[2][key];
+                    logger.info('Property SETPOINT of device %s set to %s.', ps[0], ps[2][key]);
+                    this.server.broadcastEvent(ps[0], key, ps[2][key]);
+                    this.server.broadcastEvent(ps[0], 'WORKING', false);
+                    this.events.emit('onSetpointChanged', that);
+                }
+            }
+        }
     }
 
-    temperatureChanged(id, value) {
-        logger.debug('temperatureChanged(%s,%s)', id, value);
-        this.temperature1 = value;
+    /*setpointChanged(id, value) {
+        logger.debug('setpointChanged(%s,%s)', id, value);
+        this.setpoint1 = value;
         let channel = this.deviceName+':'+id;
-        this.server.broadcastEvent(channel, 'TEMPERATURE', value);
-        console.log('Sending broadcast TEMPERATURE=%s to %s', value, channel);
-    }
-
-    humidityChanged(id, value) {
-        logger.debug('humidityChanged(%s,%s)', id, value);
-        this.humidity1 = value;
-        let channel = this.deviceName+':'+id;
-        this.server.broadcastEvent(channel, 'HUMIDITY', value);
-        console.log('Sending broadcast HUMIDITY=%s to %s', value, channel);
-    }
+        this.server.broadcastEvent(channel, 'SETPOINT', value);
+        this.server.broadcastEvent(channel, 'WORKING', false);
+        console.log('Sending broadcast SETPOINT=%s to %s', value, channel);
+    }*/
 
 }

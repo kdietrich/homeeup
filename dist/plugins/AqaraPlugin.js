@@ -22,11 +22,10 @@ var AqaraPlugin = /** @class */ (function () {
             logger.debug('Aqara gateway discovered.');
             gateway.on('ready', function () {
                 logger.debug('Aqara gateway is ready.');
-                //gateway.setPassword('f0f4c6c5s04fx407')
             });
             gateway.on('offline', function () {
                 gateway = null;
-                logger.debug('Aqara gateway is offline.');
+                logger.error('Aqara gateway is offline.');
             });
             gateway.on('subdevice', function (d) {
                 if (that.sensors.includes(d.getSid())) {

@@ -7,6 +7,7 @@ import { HMSECMDIR2 } from "../devices/HMSECMDIR2";
 import { HMRC42 } from "../devices/HMRC42";
 import { HMLCBL1FM } from "../devices/HMLCBL1FM";
 import { HMWDS40THI } from "../devices/HMWDS40THI";
+import { HMCCTC } from "../devices/HMCCTC";
 
 export class DebugPlugin implements PluginInterface {
 
@@ -32,6 +33,8 @@ export class DebugPlugin implements PluginInterface {
         this.devices.push(new HMLCBL1FM(p.deviceName+'Blinds'));
 
         this.devices.push(new HMWDS40THI(p.deviceName+'TempHumid'));
+
+        this.devices.push(new HMCCTC(p.deviceName+'TempControl'));
 
         logger.info('Plugin %s initialized.', this.name);
 
