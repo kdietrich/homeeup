@@ -38,11 +38,16 @@ export class XMLRPCServer {
         logger.info('XMLRPCServer listening on address %s and port %s.', this.host, this.port);
     }
 
-    broadcastEvent(deviceName, name, value) {
+    broadcastEvent(deviceName, name, value, explicitDouble=false) {
         logger.debug('broadcastEvent(%s,%s,%s)', deviceName, name, value);
         this.consumers.forEach(function(c) {
             var payload = [];
-            payload.push({'methodName': 'event', 'params': [c.id, deviceName, name, value]});
+            if(explicitDouble) {
+                payload.push({'methodName': 'event', 'params': [c.id, deviceName, name, {"explicitDouble": value}]});
+            }
+            else {
+                payload.push({'methodName': 'event', 'params': [c.id, deviceName, name, value]});
+            }
             logger.debug('rpc > method %s payload %s', 'system.multicall', JSON.stringify(payload));
             c.client.methodCall('system.multicall', [payload], function(err, value) {
                 //TODO proper error handling

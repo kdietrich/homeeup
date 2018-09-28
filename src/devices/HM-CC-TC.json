@@ -128,11 +128,11 @@
         "SETPOINT": {
           "FLAGS": 3,
           "ID": "SETPOINT",
-          "MIN": 6,
+          "MIN": 8,
           "MAX": 30,
           "OPERATIONS": 7,
           "TAB_ORDER": 1,
-          "TYPE": "INTEGER",
+          "TYPE": "FLOAT",
           "UNIT": "°C",
           "CONTROL": "TEMP.SETPOINT"
         }
@@ -164,7 +164,9 @@
       "name": "%ADDRESS%:1",
       "type": "VALUES",
       "value": {
-        "SETPOINT": "%SETPOINT1%"
+        "SETPOINT": {
+          "explicitDouble": "%SETPOINT1%"
+        }
       }
     }
   ]

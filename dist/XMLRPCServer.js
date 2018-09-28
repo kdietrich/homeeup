@@ -28,11 +28,17 @@ var XMLRPCServer = /** @class */ (function () {
         this._initConsumers();
         logger.info('XMLRPCServer listening on address %s and port %s.', this.host, this.port);
     };
-    XMLRPCServer.prototype.broadcastEvent = function (deviceName, name, value) {
+    XMLRPCServer.prototype.broadcastEvent = function (deviceName, name, value, explicitDouble) {
+        if (explicitDouble === void 0) { explicitDouble = false; }
         logger.debug('broadcastEvent(%s,%s,%s)', deviceName, name, value);
         this.consumers.forEach(function (c) {
             var payload = [];
-            payload.push({ 'methodName': 'event', 'params': [c.id, deviceName, name, value] });
+            if (explicitDouble) {
+                payload.push({ 'methodName': 'event', 'params': [c.id, deviceName, name, { "explicitDouble": value }] });
+            }
+            else {
+                payload.push({ 'methodName': 'event', 'params': [c.id, deviceName, name, value] });
+            }
             logger.debug('rpc > method %s payload %s', 'system.multicall', JSON.stringify(payload));
             c.client.methodCall('system.multicall', [payload], function (err, value) {
                 //TODO proper error handling

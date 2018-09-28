@@ -9,7 +9,7 @@ var HMCCTC = /** @class */ (function () {
     function HMCCTC(deviceName) {
         this.templatePath = 'HM-CC-TC.json';
         this.events = new EventEmitter();
-        this.setpoint1 = 0;
+        this.setpoint1 = 8.0;
         this.deviceName = deviceName;
     }
     HMCCTC.prototype.init = function (pluginParams, plugin, server) {
@@ -58,7 +58,7 @@ var HMCCTC = /** @class */ (function () {
                 if (key == 'SETPOINT') {
                     this.setpoint1 = ps[2][key];
                     logger.info('Property SETPOINT of device %s set to %s.', ps[0], ps[2][key]);
-                    this.server.broadcastEvent(ps[0], key, ps[2][key]);
+                    this.server.broadcastEvent(ps[0], key, ps[2][key], true);
                     this.server.broadcastEvent(ps[0], 'WORKING', false);
                     this.events.emit('onSetpointChanged', that);
                 }

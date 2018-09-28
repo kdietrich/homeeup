@@ -12,7 +12,7 @@ export class HMCCTC {
     template;
     plugin;
     server;
-    setpoint1 = 0;
+    setpoint1 = 8.0;
 
     constructor(deviceName: String) {
         this.deviceName = deviceName;
@@ -69,7 +69,7 @@ export class HMCCTC {
                 if(key=='SETPOINT') {
                     this.setpoint1 = ps[2][key];
                     logger.info('Property SETPOINT of device %s set to %s.', ps[0], ps[2][key]);
-                    this.server.broadcastEvent(ps[0], key, ps[2][key]);
+                    this.server.broadcastEvent(ps[0], key, ps[2][key], true);
                     this.server.broadcastEvent(ps[0], 'WORKING', false);
                     this.events.emit('onSetpointChanged', that);
                 }

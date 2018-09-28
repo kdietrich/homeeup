@@ -11,7 +11,7 @@
     "mqtt": "^2.16.0",
     "node-kobold": "^0.1.2",
     "node-persist": "^2.1.0",
-    "xmlrpc": "https://github.com/kdietrich/node-xmlrpc/tarball/3a74385bdbe889bfcfc698d0a8983aa1ce8c0bc3"
+    "xmlrpc": "https://github.com/kdietrich/node-xmlrpc/tarball/e79a4e33a2a410112aab29877027fb8f940eca8a"
   },
   "devDependencies": {
     "@types/node": "^9.4.7",
