@@ -1,10 +1,8 @@
 FROM node:8.11.4-slim
 
-WORKDIR /homeeup
-COPY . /homeeup
-
-RUN yarn install --prod
-
-CMD node /homeeup/bin/homeeup
+RUN npm install -g homeeup
 
 EXPOSE 2001
+
+CMD ["/usr/local/bin/homeeup"]
+
